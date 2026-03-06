@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPYDER - Event Certificates</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/fontawesome-all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #851428;
+            --primary-glow: rgba(133, 20, 40, 0.4);
+            --bg-dark: #0a0b10;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --input-bg: rgba(20, 23, 40, 0.6);
+            --text-main: #ffffff;
+            --text-muted: #bfc3d9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: radial-gradient(circle at center, #1b1f35 0%, #0a0b10 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 20px;
+            align-items: center;
+        }
+
+        .banner-top {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 15px;
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .hicas-logo,
+        .IT-logo {
+            height: 85px;
+            width: auto;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.1));
+        }
+
+        .banner-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .spy1 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #fff;
+            line-height: 1.2;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .spy11 {
+            font-size: 19px;
+            color: var(--text-muted);
+            margin-top: 5px;
+            font-weight: 400;
+        }
+
+        .extra-banner {
+            text-align: center;
+            margin-bottom: 40px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .extra-banner img {
+            max-width: 450px;
+            width: 90%;
+            height: auto;
+            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.1));
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 600px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        h3 {
+            text-align: center;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        h4 {
+            text-align: center;
+            font-size: 16px;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        /* Form Inputs */
+        .form-floating {
+            width: 100%;
+            max-width: 350px;
+            margin: 0 auto;
+        }
+
+        .form-floating>.form-control {
+            background: var(--input-bg) !important;
+            border: 1px solid var(--glass-border) !important;
+            border-radius: 12px;
+            color: #fff;
+            padding: 14px 18px !important;
+            height: auto !important;
+        }
+
+        .form-floating>.form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px var(--primary-glow);
+            color: #fff;
+        }
+
+        .form-floating>label {
+            display: none !important;
+        }
+
+        /* Autofill Fix */
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus,
+        input:-webkit-autofill:active {
+            -webkit-box-shadow: 0 0 0 1000px #141728 inset !important;
+            -webkit-text-fill-color: #ffffff !important;
+            transition: background-color 5000s ease-in-out 0s;
+        }
+
+        .form-control::placeholder {
+            color: #7d849e !important;
+            opacity: 1;
+        }
+
+        /* IE / Edge */
+        .form-control:-ms-input-placeholder {
+            color: #7d849e !important;
+        }
+
+        /* Chrome / Safari */
+        .form-control::-webkit-input-placeholder {
+            color: #7d849e !important;
+        }
+
+        .submit {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .submit button {
+            display: block;
+            width: 100%;
+            max-width: 250px;
+            margin: 0 auto;
+            padding: 14px;
+            background: linear-gradient(135deg, #b38b4d 0%, #8a6a35 100%);
+            border: none;
+            border-radius: 12px;
+            color: #000;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .submit button:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+
+        footer {
+            margin-top: 40px;
+            color: var(--text-muted);
+            font-size: 13px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .banner-top {
+                gap: 15px;
+                margin-bottom: 10px;
+            }
+
+            .hicas-logo,
+            .IT-logo {
+                height: 50px;
+            }
+
+            .spy1 {
+                font-size: 16px;
+            }
+
+            .spy11 {
+                font-size: 13px;
+            }
+
+            .extra-banner img {
+                max-width: 280px;
+            }
+
+            .main-container {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="banner-top">
+        <div>
+            <img class="hicas-logo" src="../assets/img/logo/hicas logo file -02.png" alt="Hindusthan College Logo">
+        </div>
+        <div class="banner-text">
+            <div class="spy1">Hindusthan College of Arts & Science</div>
+            <div class="spy11">Department of Information Technology</div>
+        </div>
+        <div>
+            <img class="IT-logo" src="../assets/img/logo/croped-IT logo.png" alt="IT Association Logo">
+        </div>
+    </div>
+
+    <div class="extra-banner">
+        <img src="../assets/img/logo/white-logo-font.png" alt="SPYDER">
+    </div>
+
+    <div class="main-container">
+        <!-- <form action="interdepartment_certificate.php" method="post"> -->
+        <h3>INTER DEPARTMENT EVENT CERTIFICATES</h3>
+
+        <div style="text-align: center; margin: 40px 0;">
+            <i class="fas fa-star"
+                style="font-size: 54px; color: #b38b4d; margin-bottom: 20px; filter: drop-shadow(0 0 10px rgba(179, 139, 77, 0.3));"></i>
+            <h4 style="color: #fff; font-size: 1.2rem; line-height: 1.6; max-width: 80%; margin: 0 auto;">
+                You will be able to download your certificates here after your event participation has been successfully
+                verified.
+            </h4>
+        </div>
+
+        <!--
+            <h4>Enter your registered email</h4>
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="email" name="email" placeholder="Email ID" required>
+            </div>
+
+            <div class="submit">
+                <button type="submit" name="submit" value="submit">Get Certificate</button>
+            </div>
+            </form>
+            -->
+    </div>
+
+    <footer>
+        © 2026 SPYDER Department of Information Technology
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,173 @@
+.line {
+  margin: 25px 10px 25px;
+  border: none;
+  height: 3px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), #851428, rgba(0, 0, 0, 0));
+  border-radius: 0px;
+}
+.gallery-banner {
+    margin-bottom: 50px;
+}
+.gallery {
+    margin: 10px 150px 10px;
+}
+/* Main image in lightbox */
+.gallery-main-img {
+  cursor: pointer;
+  border-radius: 8px; /* Add rounded corners */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
+  transition: transform 0.3s ease-in-out; /* Add a smooth zoom effect */
+  max-width: 100%; /* Set the maximum width to 100% */
+  max-height: 250px; /* Set the maximum height to 250px */
+  object-fit: cover; /* Zoom in the image while maintaining aspect ratio */
+}
+
+/* Rest of your existing styles */
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 30px;
+  cursor: pointer;
+  color: #fff;
+  z-index: 1; /* Ensure the close button is above the image */
+}
+
+/* Full-screen mode styling */
+.full-view {
+  /* position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;  */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Ensure the full-view container is above the rest of the content */
+  overflow: hidden;
+} 
+#fullViewImage1 {
+  /* max-width: 100%;
+  max-height: 100%; */
+  cursor: pointer;
+  transition: transform 0.5s ease; /* Add smooth transition for zoom effect */
+} 
+  /* Thumbnail styling */
+  .gallery-thumbnail {
+    cursor: pointer;
+    border-radius: 4px; /* Add rounded corners to thumbnails */
+    transition: transform 0.3s ease-in-out; /* Add a smooth hover effect */
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    background-size: cover !important;
+    height: 200px;
+  }
+  
+  .gallery-thumbnail:hover {
+    transform: scale(1.1); /* Zoom in on hover */
+  }
+  
+  /* Gallery container styling */
+  .gallery-container {
+    position: relative;
+    overflow: hidden; /* Hide overflowing content */
+    margin: 0 -15px; /* Add negative margin for left and right spacing */
+  }
+  
+  /* Lightbox styling */
+  .lightbox {
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Main image in lightbox */
+  .lightbox img {
+    max-width: 70%; /* Reduce the width of the main image */
+    /* max-height: 80vh; */
+    border-radius: 8px; /* Add rounded corners */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Add a subtle shadow */
+    margin-bottom: 25px;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    background-size: cover !important;
+    height: 300px;
+    width: auto;
+  }
+  
+  /* Full view styling */
+  .full-view {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .full-view img {
+    max-width: 80%;
+    max-height: 80%;
+    border-radius: 8px; /* Add rounded corners to full view image */
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8); /* Add a subtle glow effect */
+  }
+  
+  /* Additional styling for the page */
+  body {
+    margin: 0;
+    font-family:"Sarabun",sans-serif;
+    background-color: #f8f9fa; /* Set a light background color */
+  }
+  
+  .gallery-year {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #161616; /* Set the text color to a blue shade */
+    font-size: 40px;
+  }
+  
+  /*------------- RESPONSIVE --------------------------*/
+  @media (max-width: 575px){
+    .gallery{
+      margin: 0px;
+    }
+  }
+  @media (max-width: 575px){
+    .lightbox img{
+      max-width: 100%;
+      height: 200px;
+    }
+    .gallery-thumbnail{
+      height: 85px;
+    }
+    .thumbnail1{
+      margin-left: 0px;
+    }
+    .thumbnail2{
+      padding: 0px !important;
+    }
+    .gallery-container{
+      align-items: center;
+    }
+  }
+
+  @media (max-width: 575px){
+    .footer-area{
+        padding-top: 50px !important;
+    }
+  }

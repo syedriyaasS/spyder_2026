@@ -1,0 +1,1025 @@
+.logo img {
+    width: 150px;
+    height: auto;
+    margin-top: 0px;
+}
+
+.about-image img {
+    padding-bottom: 5px;
+}
+
+.main-menu a:link {
+    text-decoration: none;
+    color: #851428;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+#navigation a:hover {
+    text-decoration: none;
+    color: #851428;
+}
+
+a:active {
+    text-decoration: none;
+    color: #851428 !important;
+}
+
+.about-caption p {
+    text-align: justify;
+    /* About spyder content */
+}
+
+@media(max-width:575px) {
+    .spyder-title {
+        margin-top: 0px;
+    }
+}
+
+@media(max-width:575px) {
+    .spyder-content {
+        margin-bottom: 10px;
+    }
+}
+
+.footer-logo img {
+    width: 200px;
+    height: auto;
+}
+
+.section-padding40 {
+    padding-top: -40px !important;
+}
+
+.section-padding- {
+    padding-top: 80px;
+    padding-bottom: 50px;
+}
+
+.footer-wejed {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.container {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.section-padding50 {
+    padding-top: 80px;
+    padding-bottom: 50px;
+    margin-left: -47px;
+    margin-right: -47px;
+}
+
+.srs {
+    padding-top: 0px;
+    border-radius: 10px;
+}
+
+.section-title h2 {
+    padding-top: 50px;
+}
+
+.section-padding30 {
+    padding-top: 70px;
+    padding-bottom: 40px;
+}
+
+.speaker {
+    padding-top: 9rem;
+    padding-left: 70px;
+}
+
+.team-img {
+    /* margin-left: -10px; */
+}
+
+.section-padding22 {
+    padding-top: 0px;
+    padding-bottom: 75px;
+}
+
+.header-area .main-header .main-menu ul li a.active {
+    color: #851428;
+    border-bottom: 1px solid #851428;
+    padding-bottom: 1px;
+}
+
+.contact_banner {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: linear-gradient(90deg, rgba(193, 21, 57, 0.8)21%, rgba(193, 21, 57, 0.8)21%), url(../img/hero/contact_banner.jpg);
+}
+
+.events_banner {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: linear-gradient(90deg, rgba(193, 21, 57, 0.8)21%, rgba(193, 21, 57, 0.8)21%), url(../img/hero/events_banner.jpg);
+}
+
+.contact-title {
+    padding-top: 30px;
+}
+
+.accordion-nav {
+    margin-left: 90px;
+}
+
+@media (max-width: 575px) {
+    .accordion-nav {
+        margin-left: 0;
+    }
+
+    .accordion .nav-tabs .nav-link {
+        padding: 8px 37px;
+        margin-bottom: 20px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .accordion .nav-tabs {
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+
+    .accordion .nav-tabs .nav-link .break-time {
+        margin-left: 40px;
+    }
+}
+
+body {
+    overflow-x: hidden !important;
+}
+
+@media (max-width: 480px) {
+    html {
+        overflow-x: hidden !important;
+    }
+}
+
+@media (max-width: 800px) {
+    html {
+        overflow-x: hidden !important;
+    }
+}
+
+/*Sarasvathi mam*/
+@media (max-width: 575px) {
+    .about-low-area .about-img .about-back-img img {
+        margin-left: 3px;
+        margin-top: 25px;
+    }
+}
+
+/*Event & Gallery page text under banner*/
+.text-heading {
+    opacity: 0;
+    transform: translateX(-50px);
+    animation: fadeInLeft 1s forwards;
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Fade Up for Event page & Gallery page*/
+/* Text on banner */
+.fade-up {
+    opacity: 0;
+    transform: translateY(50px);
+    animation: fadeInUp 1.5s forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.nav-button:hover {
+    color: white;
+}
+
+/* Home page  4 Cards*/
+.about-IT {
+    padding: 20px;
+    padding-right: 30px;
+    text-align: center;
+    padding-top: 10px;
+}
+
+.about-IT p {
+    text-align: justify;
+}
+
+.hcard-1,
+.hcard-2,
+.hcard-3,
+.hcard-4 {
+    margin-top: 20px;
+    background-image: url('/assets/img/elements/card-back1.jpg');
+    background-size: cover;
+    background-position: center;
+    border: 1px solid black;
+    min-height: 230px;
+    color: black;
+    /*  hover effects  */
+    transition: transform 0.5s ease-in-out;
+}
+
+.hcard-1:hover,
+.hcard-2:hover,
+.hcard-3:hover,
+.hcard-4:hover {}
+
+/* Card Responsive */
+@media (max-width:575px) {
+
+    .hcard-1,
+    .hcard-2,
+    .hcard-3,
+    .hcard-4 {
+        margin: 0px 50px 20px;
+        min-height: 245px;
+    }
+}
+
+.card-logo {
+    width: 100px;
+    position: relative;
+    top: 10px;
+    left: 10px;
+}
+
+@media (max-width: 575px) {
+    .card-logo {
+        padding: 10px 0px 20px;
+    }
+}
+
+.logo-4 {
+    padding-top: 18px;
+}
+
+.card-text {
+    color: #64676C;
+}
+
+.card-title {
+    color: black;
+}
+
+.text-1 {
+    padding-bottom: 17px;
+}
+
+/* Card Buttons */
+.know-more {
+    color: #851428;
+    text-decoration: none;
+    /* border-bottom: 1px solid #851428; */
+}
+
+a:hover {
+    color: #851428;
+}
+
+/* placement companies*/
+@media (max-width: 575px) {
+    .placement-companies {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .work-company {
+        padding-top: 50px;
+        padding-bottom: 0px;
+    }
+}
+
+/* Footer */
+@media (max-width: 575px) {
+    .footer-area {
+        padding-top: 50px;
+    }
+}
+
+/* Webdevelopers start */
+.webdevelopers-content {
+    color: #64676C !important;
+    text-align: justify;
+}
+
+.webdevelopers-content a {
+    color: #851428;
+}
+
+.webdev-image {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.webdev-image img {
+    width: 600px;
+    height: auto;
+    border-radius: 20px;
+}
+
+@media (max-width: 770px) {
+    .webdev-image img {
+        width: fit-content;
+        height: 275px;
+        border-radius: 20px;
+    }
+}
+
+/* Card Hover animation */
+.card-hover {
+    transition: transform 0.4s ease-in-out;
+}
+
+.card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(151, 18, 42, 0.1);
+}
+
+/* Dept content */
+.size {
+    font-size: 30px;
+    letter-spacing: 2px;
+}
+
+.size1 {
+    font-size: 30px;
+    display: block;
+    color: #16161A;
+    font-weight: 700;
+    margin-bottom: 17px;
+    line-height: 1.3;
+    margin-bottom: 30px;
+}
+
+@media (max-width: 575px) {
+    .size1 {
+        font-size: 25px;
+        display: block;
+        color: #16161A;
+        font-weight: 700;
+        margin-bottom: 17px;
+        line-height: 1.3;
+        margin-bottom: 30px;
+    }
+}
+
+/*gallary responsive*/
+@media (max-width: 575px) {
+    .logo-area .row.placement-companies {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .logo-area .col-lg-4,
+    .logo-area .col-md-4,
+    .logo-area .col-sm-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .logo-area .single-logo {
+        display: inline-block;
+    }
+
+    .logo-area img {
+        border-radius: 5px;
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+/*price background image */
+.fit {
+    margin-top: -30px;
+}
+
+.single-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.middle::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-image: url('/assets/img/elements/pricebackground.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.side {
+    position: relative;
+}
+
+.side::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 43px;
+    width: 75%;
+    height: 100%;
+    z-index: -1;
+    background-image: url('/assets/img/elements/price1.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+/*event padding*/
+.event-size {
+    margin-top: 40px;
+    margin-bottom: 0px;
+}
+
+/*event nav top*/
+@media (max-width: 575px) {
+    .event-size1 {
+        font-size: 24px;
+        line-height: 1.6;
+        margin-top: -35px;
+        margin-bottom: 23px;
+    }
+}
+
+.pricetop {
+    font-size: 49px;
+    display: block;
+    color: #16161A;
+    font-weight: 700;
+    margin-bottom: 17px;
+    line-height: 1.3;
+    margin-bottom: 0px;
+    margin-top: -80px;
+}
+
+/* four card align */
+.inter4 {
+    text-align: center;
+}
+
+/*event page para top align (spyder 2025)*/
+@media (max-width: 575px) {
+    .topup {
+        margin-top: -20px;
+    }
+}
+
+/*Event content */
+.event-topic {
+    color: #64676C;
+}
+
+/*event points*/
+.point li {
+    list-style: disc;
+    color: #64676C;
+}
+
+.bold-heading {
+    font-weight: bold;
+}
+
+.pad {
+    padding-top: 10px;
+}
+
+/* event schedule card body */
+.event-schedule-card {
+    text-align: justify;
+}
+
+/* Event page ppt topic */
+.event-topic {
+    text-align: justify;
+}
+
+/* Prze card  section */
+@media (max-width:575px) {
+    .pricing-card-area {
+        margin-bottom: 20px;
+    }
+}
+
+/* small mobile */
+@media (max-width: 350px) and (min-width: 300px) {
+    .side::before {
+        content: "";
+        position: fixed;
+        left: 50px;
+        top: 0px;
+        left: 9px;
+        width: 94%;
+        height: 100%;
+        z-index: -999;
+        background-image: url("/assets/img/elements/price1.jpg");
+        background-size: cover;
+        background-position: center;
+    }
+
+    .middle::before {
+        content: "";
+        position: absolute;
+        top: 6px;
+        left: 10px;
+        width: 93%;
+        height: 100%;
+        z-index: -999;
+        background-image: url("/assets/img/elements/pricebackground.jpg");
+        background-size: cover;
+        background-position: center;
+    }
+}
+
+/* Riyaas mobile */
+@media (max-width: 360px) and (min-width: 351px) {
+    .side::before {
+        content: "";
+        position: fixed;
+        left: 50px;
+        top: 0px;
+        left: 20px;
+        width: 86%;
+        height: 100%;
+        z-index: -999;
+        background-image: url("/assets/img/elements/price1.jpg");
+        background-size: cover;
+        background-position: center;
+    }
+
+    .middle::before {
+        content: "";
+        position: absolute;
+        top: 6px;
+        left: 10px;
+        width: 93%;
+        height: 100%;
+        z-index: -999;
+        background-image: url("/assets/img/elements/pricebackground.jpg");
+        background-size: cover;
+        background-position: center;
+    }
+}
+
+/* Event page info */
+.sample-text {
+    text-align: justify;
+}
+
+/* hicas text and align */
+.spy {
+    font-size: 60px;
+    font-family: "Sarabun", sans-serif !important;
+}
+
+.spy1 {
+    font-size: 25px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.spy11 {
+    font-size: 22px;
+    text-align: center;
+}
+
+@media (max-width: 575px) {
+    .spy {
+        font-size: 20px;
+    }
+
+    .spy1 {
+        font-size: 14px;
+        margin-top: 5px;
+    }
+
+    .spy11 {
+        font-size: 12.5px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 400px) and (min-width: 360px) {
+    .spy {
+        font-size: 20px;
+    }
+
+    .spy1 {
+        font-size: 12px !important;
+    }
+
+    .spy11 {
+        font-size: 11px !important;
+    }
+}
+
+@media (max-width: 360px) {
+    .spy {
+        font-size: 20px;
+    }
+
+    .spy1 {
+        font-size: 10.5px !important;
+    }
+
+    .spy11 {
+        font-size: 9.5px !important;
+    }
+}
+
+@media (max-width: 576px) and (min-width: 770px) {
+    .spy {
+        font-size: 20px;
+    }
+
+    .spy1 {
+        font-size: 21.5px;
+    }
+
+    .spy11 {
+        font-size: 18.5px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 575px) {
+    .logo-2 img {
+        width: 120px !important;
+        margin-top: -70px !important;
+        margin-left: 240px !important;
+    }
+}
+
+@media (max-width: 360px) {
+    .logo-2 img {
+        width: 120px !important;
+        margin-top: -70px !important;
+        margin-left: 195px !important;
+    }
+}
+
+.banner-top {
+    display: flex;
+    margin-top: 80px;
+}
+
+.hicas-logo {
+    height: 90px;
+}
+
+.IT-logo {
+    height: 90px;
+}
+
+@media (max-width:575px) {
+    .banner-top {
+        margin-top: 40px;
+    }
+
+    .hicas-logo {
+        height: 50px;
+    }
+
+    .IT-logo {
+        height: 50px;
+    }
+}
+
+/* @media (max-width:770px)  */
+@media (max-width: 576px) and (min-width: 770px) {
+    .single-slider {
+        height: 480px;
+    }
+
+    .banner-top {
+        margin-top: 35px;
+    }
+
+    .hicas-logo {
+        height: 100px;
+    }
+
+    .IT-logo {
+        height: 90px;
+    }
+
+    .logo-2 img {
+        margin-left: 375px;
+        width: 200px;
+        height: auto;
+        margin-top: -108px;
+    }
+}
+
+@media (min-width:576px) {
+    .spyder-slogan {
+        margin-top: 40px;
+    }
+}
+
+.logo-2 img {
+    margin-top: 155px;
+    margin-left: 80px;
+}
+
+/* Nav active in mobile */
+.slicknav_nav a.active {
+    color: #851428;
+}
+
+/* Tab View Responisve */
+@media (max-width: 768px) and (min-width: 451px) {
+    .spy1 {
+        font-size: 20px;
+    }
+
+    .spy11 {
+        font-size: 18px;
+    }
+
+    .logo-2 img {
+        margin-left: 375px;
+        width: 200px;
+        height: auto;
+        margin-top: -108px;
+    }
+
+    .size1 {
+        font-size: 25px;
+    }
+
+    /* Price card */
+    .side::before {
+        content: "";
+        position: fixed;
+        left: 50px;
+        top: 5px;
+        left: 200px;
+        width: 38%;
+        height: 100%;
+        z-index: -999;
+        background-image: url("/assets/img/elements/price1.jpg");
+        background-size: cover;
+        background-position: center;
+    }
+
+    .middle::before {
+        content: "";
+        position: absolute;
+        top: 6px;
+        left: 140px;
+        width: 54%;
+        height: 100%;
+        z-index: -999;
+        background-image: url("/assets/img/elements/pricebackground.jpg");
+        background-size: cover;
+        background-position: center;
+    }
+
+    .pricing-card-area .single-card.active {
+        background: white;
+        transform: scale(1.2);
+    }
+
+    .single-card {
+        margin-top: 50px;
+    }
+
+    .section-title h2 {
+        margin-bottom: 0px;
+    }
+
+    .pricing-card-area .single-card .card-top {
+        border-bottom: none;
+        margin-bottom: 46px;
+    }
+
+    .pricing-card-area .single-card.active .card-top {
+        border-bottom: none;
+    }
+
+    /* 4 card */
+    .card-text {
+        font-size: 13px !important;
+    }
+
+    .about-it-content {
+        font-size: 13px;
+    }
+
+    .first-card {
+        margin-bottom: 35px;
+    }
+
+    .text-1 {
+        margin-bottom: 47px;
+    }
+
+    .card-title h5 {
+        font-size: 1rem;
+    }
+}
+
+/* Mobile - Desktop view */
+@media (max-width: 1024px) and (min-width: 950px) {
+    .spy1 {
+        font-size: 20px;
+    }
+
+    .spy11 {
+        font-size: 18px;
+    }
+
+    .logo-2 img {
+        margin-left: 375px;
+        width: 200px;
+        height: auto;
+        margin-top: -108px;
+    }
+
+    .size1 {
+        font-size: 25px;
+    }
+
+    /* Price card */
+    .side::before {
+        content: "";
+        position: fixed;
+        left: 50px;
+        top: 5px;
+        left: 200px;
+        width: 38%;
+        height: 100%;
+        z-index: -999;
+        background-image: url("../img/elements/price1.jpg");
+        background-size: cover;
+        background-position: center;
+    }
+
+    .middle::before {
+        content: "";
+        position: absolute;
+        top: 6px;
+        left: 140px;
+        width: 54%;
+        height: 100%;
+        z-index: -999;
+        background-image: url("/assets/img/elements/pricebackground.jpg");
+        background-size: cover;
+        background-position: center;
+    }
+
+    .pricing-card-area .single-card.active {
+        background: white;
+        transform: scale(1.2);
+    }
+
+    .single-card {
+        margin-top: 50px;
+    }
+
+    .section-title h2 {
+        margin-bottom: 0px;
+    }
+
+    .pricing-card-area .single-card .card-top {
+        border-bottom: none;
+        margin-bottom: 46px;
+    }
+
+    .pricing-card-area .single-card.active .card-top {
+        border-bottom: none;
+    }
+
+    /* 4 card */
+    .card-text {
+        font-size: 13px !important;
+    }
+
+    .about-it-content {
+        font-size: 13px;
+    }
+
+    .first-card {
+        margin-bottom: 35px;
+    }
+
+    .text-1 {
+        margin-bottom: 47px;
+    }
+
+    .card-title h5 {
+        font-size: 1rem;
+    }
+}
+
+/* Footer linkedin */
+.site-name {
+    margin-top: 10px;
+    margin-left: 60px;
+}
+
+.footer-logo img {
+    margin-top: 5px;
+}
+
+@media (max-width:575px) {
+    .site-name {
+        margin-top: 0px;
+        margin-left: 3px;
+    }
+}
+
+.developer-heading {
+    margin-right: auto;
+    font-size: 20px;
+    margin-left: 70px;
+    margin-top: 15px;
+}
+
+@media (max-width:770px) and (min-width:575px) {
+    .developer-heading {
+        margin-right: 50px;
+        font-size: 20px;
+    }
+}
+
+@media (max-width:575px) {
+    .developer-heading {
+        margin-top: 0px;
+        margin-left: 3px;
+    }
+}
+
+.developers {
+    display: inline;
+}
+
+.copyrights {
+    font-size: 15px;
+    margin-top: 5px;
+}
+
+.linkedin-1 {
+    margin-left: 23px;
+}
+
+.footer-area .footer-tittle-bottom p {
+
+    cursor: pointer;
+}
+
+.developers-name {
+    margin-top: 8px;
+}
+
+/* Register page */
+.error {
+    color: #851428;
+    font-size: 12px;
+}
+
+#checkboxer {
+    color: #851428;
+}
+
+/* .linkedin-name:hover{
+    color: #0077B5 !important;
+} */
+.developers:hover {
+    color: #0077B5;
+}

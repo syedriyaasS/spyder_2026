@@ -1,0 +1,36 @@
+[2025-01-06 11:14:39] Request received for email: testuser2@gmail.com
+[2025-01-06 11:14:39] Participant found: {"id":"27","name":"Syed Riyaas","department":"Information technology ","college":"Hindusthan College of Arts & Science","email":"testuser2@gmail.com","mobile":"8384729379","event1":"Paper Presentation","event2":"Individual Talent"}
+[2025-01-06 11:14:39] Generating certificate for event: Paper Presentation
+[2025-01-06 11:14:39] Certificate generated: /home/u584968255/domains/itspyder.in/public_html/mailer/interdepartment-generated-certificates/testuser2@gmail.com_Paper Presentation.pdf
+[2025-01-06 11:14:39] Generating certificate for event: Individual Talent
+[2025-01-06 11:14:39] Certificate generated: /home/u584968255/domains/itspyder.in/public_html/mailer/interdepartment-generated-certificates/testuser2@gmail.com_Individual Talent.pdf
+[2025-01-06 11:14:39] Creating RAR file: /home/u584968255/domains/itspyder.in/public_html/mailer/interdepartment-generated-certificates/testuser2@gmail.com_certificates.rar
+[2025-01-06 11:14:39] RAR file created successfully: /home/u584968255/domains/itspyder.in/public_html/mailer/interdepartment-generated-certificates/testuser2@gmail.com_certificates.rar
+[2025-01-06 11:19:11] Request received for email: dharanishmech2004@gmail.com
+[2025-01-06 11:19:11] Participant found: {"id":"29","name":"Dharanishwaran","department":"Information technology","college":"Hindusthan College of Arts & Science","email":"dharanishmech2004@gmail.com","mobile":"9361355866","event1":"Paper Presentation","event2":""}
+[2025-01-06 11:19:11] Generating certificate for event: Paper Presentation
+[2025-01-06 11:19:11] Certificate generated: /home/u584968255/domains/itspyder.in/public_html/mailer/interdepartment-generated-certificates/dharanishmech2004@gmail.com_Paper Presentation.pdf
+[2025-01-06 11:19:11] Converting PDF to image: /home/u584968255/domains/itspyder.in/public_html/mailer/interdepartment-generated-certificates/dharanishmech2004@gmail.com_Paper Presentation.jpg
+[2025-01-06 11:20:42] Request received for email: test@gmail.com
+[2025-01-06 11:20:42] Participant found: {"id":"30","name":"Dharanishwaran","department":"Information technology","college":"Hindusthan College of Arts & Science","email":"test@gmail.com","mobile":"9361355867","event1":"Paper Presentation","event2":""}
+[2025-01-06 11:20:42] Generating certificate for event: Paper Presentation
+[2025-01-06 11:20:42] Certificate generated: /home/u584968255/domains/itspyder.in/public_html/mailer/interdepartment-generated-certificates/test@gmail.com_Paper Presentation.pdf
+[2025-01-06 11:20:42] Converting PDF to image: /home/u584968255/domains/itspyder.in/public_html/mailer/interdepartment-generated-certificates/test@gmail.com_Paper Presentation.jpg
+[2025-01-06 11:21:48] Request received for email: abc@gmail.com
+[2025-01-06 11:21:48] Participant found: {"id":"31","name":"Abc","department":"Information technology","college":"Hindusthan College of Arts & Science","email":"abc@gmail.com","mobile":"1234567890","event1":"Debugging","event2":""}
+[2025-01-06 11:21:48] Generating certificate for event: Debugging
+[2025-01-06 11:21:48] Certificate generated: /home/u584968255/domains/itspyder.in/public_html/mailer/interdepartment-generated-certificates/abc@gmail.com_Debugging.pdf
+[2025-01-06 11:21:48] Converting PDF to image: /home/u584968255/domains/itspyder.in/public_html/mailer/interdepartment-generated-certificates/abc@gmail.com_Debugging.jpg
+[2025-01-06 11:22:14] Request received for email: abc@gmail.com
+[2025-01-06 11:22:14] Participant found: {"id":"31","name":"Abc","department":"Information technology","college":"Hindusthan College of Arts & Science","email":"abc@gmail.com","mobile":"1234567890","event1":"Debugging","event2":""}
+[2025-01-06 11:22:14] Generating certificate for event: Debugging
+[2025-01-06 11:22:14] Certificate generated: /home/u584968255/domains/itspyder.in/public_html/mailer/interdepartment-generated-certificates/abc@gmail.com_Debugging.pdf
+[2025-01-06 11:22:14] Converting PDF to image: /home/u584968255/domains/itspyder.in/public_html/mailer/interdepartment-generated-certificates/abc@gmail.com_Debugging.jpg
+[2025-01-06 11:23:05] Request received for email: abcd@gmail.com
+[2025-01-06 11:23:05] Participant found: {"id":"32","name":"Abcd","department":"Information technology","college":"Hindusthan College of Arts & Science","email":"abcd@gmail.com","mobile":"1234657890","event1":"Paper Presentation","event2":"Solo-Dancing"}
+[2025-01-06 11:23:05] Generating certificate for event: Paper Presentation
+[2025-01-06 11:23:05] Certificate generated: /home/u584968255/domains/itspyder.in/public_html/mailer/interdepartment-generated-certificates/abcd@gmail.com_Paper Presentation.pdf
+[2025-01-06 11:23:05] Generating certificate for event: Solo-Dancing
+[2025-01-06 11:23:05] Certificate generated: /home/u584968255/domains/itspyder.in/public_html/mailer/interdepartment-generated-certificates/abcd@gmail.com_Solo-Dancing.pdf
+[2025-01-06 11:23:05] Creating RAR file: /home/u584968255/domains/itspyder.in/public_html/mailer/interdepartment-generated-certificates/abcd@gmail.com_certificates.rar
+[2025-01-06 11:23:05] RAR file created successfully: /home/u584968255/domains/itspyder.in/public_html/mailer/interdepartment-generated-certificates/abcd@gmail.com_certificates.rar

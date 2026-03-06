@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPYDER Event Registration</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
+    <style>
+        :root {
+            --primary: #851428;
+            --primary-glow: rgba(133, 20, 40, 0.4);
+            --bg-dark: #0a0b10;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --input-bg: rgba(20, 23, 40, 0.6);
+            --text-main: #ffffff;
+            --text-muted: #bfc3d9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: radial-gradient(circle at center, #1b1f35 0%, #0a0b10 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 20px;
+            align-items: center;
+        }
+
+        .banner-top {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 15px;
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .hicas-logo,
+        .IT-logo {
+            height: 85px;
+            width: auto;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.1));
+        }
+
+        .banner-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .spy1 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #fff;
+            line-height: 1.2;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .spy11 {
+            font-size: 19px;
+            color: var(--text-muted);
+            margin-top: 5px;
+            font-weight: 400;
+        }
+
+        .extra-banner {
+            text-align: center;
+            margin-bottom: 40px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .extra-banner img {
+            max-width: 450px;
+            width: 90%;
+            height: auto;
+            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.1));
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 800px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        h2.form-title {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #fff;
+            text-align: left;
+        }
+
+        p.form-subtitle {
+            font-size: 15px;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .section-divider {
+            height: 1px;
+            background: var(--glass-border);
+            margin: 25px 0;
+        }
+
+        h3.section-heading {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            color: #fff;
+            text-align: left;
+        }
+
+        /* Form Inputs */
+        .input-wrapper {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 18px;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            padding: 14px 18px 14px 50px;
+            background: var(--input-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 15px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .input-wrapper input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px var(--primary-glow);
+        }
+
+        /* Autofill Fix */
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus,
+        input:-webkit-autofill:active {
+            -webkit-box-shadow: 0 0 0 1000px #141728 inset !important;
+            -webkit-text-fill-color: #ffffff !important;
+            transition: background-color 5000s ease-in-out 0s;
+        }
+
+        .note-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 30px 0 20px 0;
+            padding: 0 5px;
+        }
+
+        .note-orange {
+            color: var(--text-muted);
+            font-size: 16px;
+            font-weight: 500;
+            margin: 0 !important;
+            text-align: left !important;
+        }
+
+        .reset-btn {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .reset-btn:hover {
+            background: var(--primary-glow);
+            box-shadow: 0 0 15px var(--primary-glow);
+            border-color: #ff4d4d;
+        }
+
+        /* Event Grid */
+        .event-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .event-column h4 {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 15px;
+            color: var(--text-muted);
+            text-align: left;
+        }
+
+        .event-card {
+            display: block;
+            position: relative;
+            background: var(--input-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .event-card input[type="radio"] {
+            display: none;
+        }
+
+        .event-card .card-content {
+            display: flex;
+            align-items: center;
+        }
+
+        .radio-circle {
+            width: 18px;
+            height: 18px;
+            border: 2px solid var(--text-muted);
+            border-radius: 50%;
+            margin-right: 15px;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .event-card input[type="radio"]:checked+.card-content .radio-circle {
+            border-color: var(--primary);
+        }
+
+        .event-card input[type="radio"]:checked+.card-content .radio-circle::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--primary);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .event-info {
+            flex-grow: 1;
+        }
+
+        .event-name {
+            font-size: 15px;
+            font-weight: 500;
+            color: #fff;
+            display: block;
+        }
+
+        .event-participants {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* Glowing effect for Technical Events */
+        .event-column:first-child .event-card:hover,
+        .event-column:first-child .event-card input[type="radio"]:checked+.card-content {
+            border-color: rgba(255, 170, 0, 0.5);
+        }
+
+        .event-column:first-child .event-card input[type="radio"]:checked+.card-content::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 11px;
+            background: linear-gradient(90deg, rgba(255, 170, 0, 0.1), transparent);
+            pointer-events: none;
+        }
+
+        .register-btn {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 40px auto 0;
+            padding: 14px;
+            background: linear-gradient(135deg, #b38b4d 0%, #8a6a35 100%);
+            border: none;
+            border-radius: 12px;
+            color: #000;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .register-btn:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+
+        .register-btn:disabled {
+            background: #444;
+            color: #777;
+            cursor: not-allowed;
+            transform: none;
+            opacity: 0.6;
+        }
+
+        footer {
+            margin-top: 40px;
+            color: var(--text-muted);
+            font-size: 13px;
+            text-align: center;
+        }
+
+        /* Custom Popup Styles */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .popup-content {
+            background: #141728;
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 35px 30px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            transform: translateY(20px) scale(0.95);
+            transition: transform 0.3s ease;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+        }
+
+        .popup-overlay.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .popup-overlay.show .popup-content {
+            transform: translateY(0) scale(1);
+        }
+
+        .popup-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .icon-success {
+            color: #2ecc71;
+        }
+
+        .icon-error {
+            color: #e74c3c;
+        }
+
+        .icon-warning {
+            color: #f39c12;
+        }
+
+        .popup-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .popup-message {
+            font-size: 15px;
+            color: var(--text-muted);
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .popup-btn {
+            background: linear-gradient(135deg, #b38b4d 0%, #8a6a35 100%);
+            color: #000;
+            border: none;
+            padding: 10px 35px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .popup-btn:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .event-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .main-container {
+                padding: 25px;
+            }
+
+            .banner-top {
+                gap: 15px;
+                margin-bottom: 10px;
+            }
+
+            .hicas-logo,
+            .IT-logo {
+                height: 50px;
+            }
+
+            .spy1 {
+                font-size: 16px;
+            }
+
+            .spy11 {
+                font-size: 13px;
+            }
+
+            .extra-banner img {
+                max-width: 280px;
+            }
+
+            .note-container {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .note-orange {
+                text-align: center !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="banner-top">
+        <div>
+            <img class="hicas-logo" src="assets/img/logo/hicas logo file -02.png" alt="Hhindusthan College Logo">
+        </div>
+        <div class="banner-text">
+            <div class="spy1">Hindusthan College of Arts & Science</div>
+            <div class="spy11">Department of Information Technology</div>
+        </div>
+        <div>
+            <img class="IT-logo" src="assets/img/logo/croped-IT logo.png" alt="IT Association Logo">
+        </div>
+    </div>
+
+    <div class="extra-banner">
+        <img src="assets/img/logo/white-logo-font.png" alt="SPYDER">
+    </div>
+
+    <div class="main-container">
+        <form action="interdept_register.php" method="post">
+            <h2 class="form-title">Event Registration</h2>
+            <p class="form-subtitle">Register individually to participate in the inter department event.</p>
+
+            <div class="section-divider"></div>
+
+            <h3 class="section-heading">Personal Information</h3>
+
+            <div class="input-wrapper">
+                <i class="fas fa-user"></i>
+                <input type="text" name="name" placeholder="Full Name" pattern="[A-Za-z\s]+"
+                    title="Only letters and spaces are allowed" required>
+            </div>
+
+            <div class="input-wrapper">
+                <i class="fas fa-building"></i>
+                <input type="text" name="department" placeholder="Department" required>
+            </div>
+
+            <div class="input-wrapper">
+                <i class="fas fa-graduation-cap"></i>
+                <input type="text" name="college" value="Hindusthan College of Arts & Science" required>
+            </div>
+
+            <div class="input-wrapper">
+                <i class="fas fa-envelope"></i>
+                <input type="email" name="email" placeholder="Email ID" required>
+            </div>
+
+            <div class="input-wrapper">
+                <i class="fas fa-mobile-alt"></i>
+                <input type="text" name="mobile" placeholder="Mobile Number" pattern="[0-9]{10}" maxlength="10"
+                    title="Please enter exactly 10 digits" required>
+            </div>
+
+            <div class="note-container">
+                <p class="note-orange">Each Participant can register for only one event!</p>
+                <button type="button" class="reset-btn" id="resetEvents">
+                    <i class="fas fa-undo-alt" style="margin-right: 8px;"></i> Clear Selection
+                </button>
+            </div>
+
+            <div class="event-grid">
+                <!-- Technical Events -->
+                <div class="event-column">
+                    <h4>Technical Events</h4>
+
+                    <label class="event-card">
+                        <input type="radio" name="event1" value="Paper Presentation">
+                        <div class="card-content">
+                            <div class="radio-circle"></div>
+                            <div class="event-info">
+                                <span class="event-name">Paper Presentation</span>
+                                <span class="event-participants">2 Participants</span>
+                            </div>
+                        </div>
+                    </label>
+
+                    <label class="event-card">
+                        <input type="radio" name="event1" value="Ideathon">
+                        <div class="card-content">
+                            <div class="radio-circle"></div>
+                            <div class="event-info">
+                                <span class="event-name">Ideathon</span>
+                                <span class="event-participants">2 Participants</span>
+                            </div>
+                        </div>
+                    </label>
+
+                    <label class="event-card">
+                        <input type="radio" name="event1" value="Debugging">
+                        <div class="card-content">
+                            <div class="radio-circle"></div>
+                            <div class="event-info">
+                                <span class="event-name">Debugging</span>
+                                <span class="event-participants">2 Participants</span>
+                            </div>
+                        </div>
+                    </label>
+
+                    <label class="event-card">
+                        <input type="radio" name="event1" value="Web Designing">
+                        <div class="card-content">
+                            <div class="radio-circle"></div>
+                            <div class="event-info">
+                                <span class="event-name">Web Designing</span>
+                                <span class="event-participants">2 Participants</span>
+                            </div>
+                        </div>
+                    </label>
+
+                    <label class="event-card">
+                        <input type="radio" name="event1" value="Poster Designing">
+                        <div class="card-content">
+                            <div class="radio-circle"></div>
+                            <div class="event-info">
+                                <span class="event-name">Poster Designing</span>
+                                <span class="event-participants">2 Participants</span>
+                            </div>
+                        </div>
+                    </label>
+
+                    <label class="event-card">
+                        <input type="radio" name="event1" value="Marketing">
+                        <div class="card-content">
+                            <div class="radio-circle"></div>
+                            <div class="event-info">
+                                <span class="event-name">Marketing</span>
+                                <span class="event-participants">2 Participants</span>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+
+                <!-- Non-Technical Events -->
+                <div class="event-column">
+                    <h4>Non-Technical Events</h4>
+
+                    <label class="event-card">
+                        <input type="radio" name="event2" value="Solo Singing">
+                        <div class="card-content">
+                            <div class="radio-circle"></div>
+                            <div class="event-info">
+                                <span class="event-name">Solo Singing</span>
+                                <span class="event-participants">2 Participants</span>
+                            </div>
+                        </div>
+                    </label>
+
+                    <label class="event-card">
+                        <input type="radio" name="event2" value="Solo Dance">
+                        <div class="card-content">
+                            <div class="radio-circle"></div>
+                            <div class="event-info">
+                                <span class="event-name">Solo Dance</span>
+                                <span class="event-participants">2 Participants</span>
+                            </div>
+                        </div>
+                    </label>
+
+                    <label class="event-card">
+                        <input type="radio" name="event2" value="Group Singing">
+                        <div class="card-content">
+                            <div class="radio-circle"></div>
+                            <div class="event-info">
+                                <span class="event-name">Group Singing (2-4 Participants)</span>
+                                <span class="event-participants">2 Participants</span>
+                            </div>
+                        </div>
+                    </label>
+
+                    <label class="event-card">
+                        <input type="radio" name="event2" value="Group Dance">
+                        <div class="card-content">
+                            <div class="radio-circle"></div>
+                            <div class="event-info">
+                                <span class="event-name">Group Dance (5-8 Participants)</span>
+                                <span class="event-participants">2 Participants</span>
+                            </div>
+                        </div>
+                    </label>
+
+                    <label class="event-card">
+                        <input type="radio" name="event2" value="Mime">
+                        <div class="card-content">
+                            <div class="radio-circle"></div>
+                            <div class="event-info">
+                                <span class="event-name">Mime (3-5 Participants)</span>
+                                <span class="event-participants">3 Participants</span>
+                            </div>
+                        </div>
+                    </label>
+
+                    <label class="event-card">
+                        <input type="radio" name="event2" value="Individual Talent">
+                        <div class="card-content">
+                            <div class="radio-circle"></div>
+                            <div class="event-info">
+                                <span class="event-name">Individual Talent</span>
+                                <span class="event-participants">1 Participant</span>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <input type="submit" name="submit" value="Register" class="register-btn" id="submitBtn" disabled>
+        </form>
+
+        <footer>
+            © 2026 SPYDER Department of Information Technology
+        </footer>
+    </div>
+
+    <!-- Custom Popup -->
+    <div id="customPopup" class="popup-overlay">
+        <div class="popup-content">
+            <div id="popupIcon" class="popup-icon"></div>
+            <h3 id="popupTitle" class="popup-title"></h3>
+            <p id="popupMessage" class="popup-message"></p>
+            <button class="popup-btn" onclick="closePopup()">OK</button>
+        </div>
+    </div>
+
+    <script>
+        const radios = document.querySelectorAll('input[type="radio"]');
+        const submitBtn = document.getElementById('submitBtn');
+
+        function updateSubmitButton() {
+            const isAnyChecked = Array.from(radios).some(radio => radio.checked);
+            submitBtn.disabled = !isAnyChecked;
+        }
+
+        radios.forEach(radio => {
+            radio.addEventListener('change', updateSubmitButton);
+        });
+
+        document.getElementById('resetEvents').addEventListener('click', function () {
+            radios.forEach(radio => {
+                radio.checked = false;
+            });
+            updateSubmitButton();
+        });
+
+        // Popup Logic
+        function showPopup(type, title, message) {
+            const popup = document.getElementById('customPopup');
+            const icon = document.getElementById('popupIcon');
+            const titleEl = document.getElementById('popupTitle');
+            const messageEl = document.getElementById('popupMessage');
+
+            icon.className = 'popup-icon fas';
+
+            if (type === 'success') {
+                icon.classList.add('fa-check-circle', 'icon-success');
+            } else if (type === 'error') {
+                icon.classList.add('fa-times-circle', 'icon-error');
+            } else if (type === 'exists') {
+                icon.classList.add('fa-exclamation-circle', 'icon-warning');
+            }
+
+            titleEl.textContent = title;
+            messageEl.textContent = message;
+
+            popup.classList.add('show');
+        }
+
+        function closePopup() {
+            document.getElementById('customPopup').classList.remove('show');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const status = urlParams.get('status');
+
+            if (status === 'success') {
+                showPopup('success', 'Registration Successful!', 'You have successfully registered for the inter-department events.');
+            } else if (status === 'exists') {
+                showPopup('exists', 'Already Registered', 'This Mobile number or Email is already registered. Please choose different values.');
+            } else if (status === 'error') {
+                showPopup('error', 'Registration Failed', 'An error occurred while processing your registration. Please try again later.');
+            }
+
+            // Remove query param without refreshing page
+            if (status) {
+                const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+                window.history.replaceState({ path: newUrl }, '', newUrl);
+            }
+        });
+    </script>
+</body>
+
+</html>
