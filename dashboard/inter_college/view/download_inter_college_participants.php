@@ -8,11 +8,11 @@ header('Content-Disposition: attachment; filename="InterCollege_' . $event_name 
 
 $output = fopen("php://output", "w");
 
-fputcsv($output, array('Name', 'Department', 'College', 'Email', 'Mobile', 'Event1 Selection', 'Event2 Selection', 'Attendance', 'Signature'));
+fputcsv($output, array('Name', 'Department', 'College', 'Email', 'Mobile', 'Event Selection', 'Attendance', 'Signature'));
 
-$sql = "SELECT `name`, `department`, `college`, `email`, `mobile`, `event1`, `event2` FROM `participants` WHERE `event1` = ? OR `event2` = ?";
+$sql = "SELECT `name`, `department`, `college`, `email`, `mobile`, `event1` FROM `participants` WHERE `event1` = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("ss", $event_name, $event_name);
+$stmt->bind_param("s", $event_name);
 $stmt->execute();
 $result = $stmt->get_result();
 

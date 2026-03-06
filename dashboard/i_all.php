@@ -97,12 +97,16 @@ $conn->close();
         width: 10%;
     }
 
+    .data-table col.col-validated {
+        width: 15%;
+    }
+
     .data-table col.col-edit {
-        width: 7%;
+        width: 6%;
     }
 
     .data-table col.col-del {
-        width: 7%;
+        width: 6%;
     }
 
     .data-table thead tr {
@@ -203,6 +207,7 @@ $conn->close();
             <col class="col-mobile">
             <col class="col-ev1">
             <col class="col-ev2">
+            <col class="col-validated">
             <col class="col-edit">
             <col class="col-del">
         </colgroup>
@@ -216,6 +221,7 @@ $conn->close();
                 <th>Mobile</th>
                 <th>Event 1</th>
                 <th>Event 2</th>
+                <th>Validated By</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
@@ -226,6 +232,14 @@ $conn->close();
             if ($result && $result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     $count++;
+                    $att1 = ((int)($row['event1_attendance'] ?? 0) === 1) ? '<span class="badge badge-success">P</span>' : '<span class="badge badge-warning">A</span>';
+                    $att2 = ((int)($row['event2_attendance'] ?? 0) === 1) ? '<span class="badge badge-success">P</span>' : '<span class="badge badge-warning">A</span>';
+                    
+                    $val1 = $row['event1_validated_by'] ?? '';
+                    $val2 = $row['event2_validated_by'] ?? '';
+                    $validators = trim(($val1 ? "Ev1: $val1" : "") . ($val2 ? " | Ev2: $val2" : ""));
+                    if (!$validators) $validators = 'Not Verified';
+
                     echo "<tr>
                         <td><span style='color:#aaa;font-size:0.82rem;'>" . $count . "</span></td>
                         <td>" . htmlspecialchars($row['name']) . "</td>
@@ -233,8 +247,9 @@ $conn->close();
                         <td>" . htmlspecialchars($row['college']) . "</td>
                         <td>" . htmlspecialchars($row['email']) . "</td>
                         <td>" . htmlspecialchars($row['mobile']) . "</td>
-                        <td>" . htmlspecialchars($row['event1']) . "</td>
-                        <td>" . htmlspecialchars($row['event2']) . "</td>
+                        <td>" . $att1 . " " . htmlspecialchars($row['event1']) . "</td>
+                        <td>" . $att2 . " " . htmlspecialchars($row['event2']) . "</td>
+                        <td class='td-wrap'><small>" . htmlspecialchars($validators) . "</small></td>
                         <td><a class='btn-edit' href='i_update.php?id=" . $row['id'] . "'>Edit</a></td>
                         <td><a class='btn-del' href='i_delete.php?id=" . $row['id'] . "' onclick=\"return confirm('Delete this participant?')\">Delete</a></td>
                     </tr>";

@@ -161,6 +161,60 @@ include 'header.php';
 
     <hr class="section-divider">
 
+    <!-- Search Participant Section -->
+    <div class="row justify-content-center pb-4">
+        <div class="col-lg-10 col-xl-8">
+            <div class="form-container">
+                <h2 class="form-section-title">Search Participant QR & Details</h2>
+                <form method="GET" action="inter_college_home.php">
+                    <div class="row g-3 align-items-end">
+                        <div class="col-md-9">
+                            <label class="form-label fw-semibold">Search by Email or Mobile Number</label>
+                            <input name="search_q" type="text" class="form-control form-control-lg" placeholder="Enter email or 10-digit mobile" required value="<?php echo isset($_GET['search_q']) ? htmlspecialchars($_GET['search_q']) : ''; ?>">
+                        </div>
+                        <div class="col-md-3">
+                            <button type="submit" class="card-btn w-100 border-0 d-flex align-items-center justify-content-center" style="font-size:1rem; height: 48px; border-radius: 8px;">Get Details</button>
+                        </div>
+                    </div>
+                </form>
+
+                <?php
+                if (isset($_GET['search_q']) && !empty($_GET['search_q'])) {
+                    include_once __DIR__ . '/../../config.php';
+                    $search_q = mysqli_real_escape_string($conn, $_GET['search_q']);
+                    $search_sql = "SELECT * FROM participants WHERE email = '$search_q' OR mobile = '$search_q' LIMIT 1";
+                    $search_result = $conn->query($search_sql);
+
+                    if ($search_result && $search_result->num_rows > 0) {
+                        $p = $search_result->fetch_assoc();
+                        echo '
+                        <div class="mt-4 p-4 rounded" style="background:#f8f9fa; border:1px solid #e0e0e0; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+                            <div class="row align-items-center">
+                                <div class="col-md-8">
+                                    <h4 class="mb-3 text-dark fw-bold">' . htmlspecialchars($p['name']) . '</h4>
+                                    <div class="mb-2"><strong>College:</strong> ' . htmlspecialchars($p['college']) . '</div>
+                                    <div class="mb-2"><strong>Department:</strong> ' . htmlspecialchars($p['department']) . '</div>
+                                    <div class="mb-2"><strong>Email:</strong> ' . htmlspecialchars($p['email']) . '</div>
+                                    <div class="mb-2"><strong>Mobile:</strong> ' . htmlspecialchars($p['mobile']) . '</div>
+                                    <div class="mb-0"><strong>Event:</strong> <span class="badge px-3 py-2" style="background-color: #851428 !important;">' . htmlspecialchars($p['event1']) . '</span></div>
+                                </div>
+                                <div class="col-md-4 text-center mt-4 mt-md-0" style="border-left: 1px dashed #ccc;">
+                                    <p class="mb-2 fw-bold text-dark">Participant QR Code</p>
+                                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=' . urlencode($p['qr_token']) . '" alt="QR Code" class="img-fluid border p-2 bg-white rounded shadow-sm">
+                                </div>
+                            </div>
+                        </div>';
+                    } else {
+                        echo '<div class="alert alert-warning mt-4 mb-0 fw-semibold"><i class="fas fa-exclamation-circle me-2"></i> No participant found with that email or mobile number.</div>';
+                    }
+                }
+                ?>
+            </div>
+        </div>
+    </div>
+
+    <hr class="section-divider">
+
     <!-- Add New Participant Section -->
     <div class="row justify-content-center pb-4">
         <div class="col-lg-10 col-xl-8">
@@ -252,17 +306,21 @@ if (isset($_POST['submit'])) {
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $mobile = mysqli_real_escape_string($conn, $_POST['mobile']);
     $event1 = mysqli_real_escape_string($conn, $_POST['event1']);
-    $event2 = "";
+    $result_qr = $conn->query("SELECT qr_token FROM participants WHERE email = '$email' OR mobile = '$mobile' LIMIT 1");
+    $qr_token = "SP-" . uniqid();
+    if ($result_qr && $result_qr->num_rows > 0) {
+        $qr_token = $result_qr->fetch_assoc()['qr_token'];
+    }
 
-    $checkSql = "SELECT COUNT(*) as count FROM `participants` WHERE `email` = '$email' OR `mobile` = '$mobile'";
+    $checkSql = "SELECT COUNT(*) as count FROM `participants` WHERE (`email` = '$email' OR `mobile` = '$mobile') AND (email != '' AND mobile != '')";
     $checkResult = $conn->query($checkSql);
     $row = $checkResult->fetch_assoc();
 
     if ($row['count'] > 0) {
         echo '<script>alert("This Mobile number or Email is already registered."); window.location.href = "inter_college_home.php";</script>';
     } else {
-        $sql = "INSERT INTO `participants`(`name`,`department`,`college`,`email`,`mobile`,`event1`,`event2`)
-                VALUES ('$name','$department','$college','$email','$mobile','$event1','$event2')";
+        $sql = "INSERT INTO `participants`(`name`,`department`,`college`,`email`,`mobile`,`event1`, `qr_token`)
+                VALUES ('$name','$department','$college','$email','$mobile','$event1', '$qr_token')";
         if ($conn->query($sql) === TRUE) {
             echo '<script>alert("Registered Successfully"); window.location.href = "inter_college_home.php";</script>';
         } else {

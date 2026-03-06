@@ -4,11 +4,10 @@ require_once __DIR__ . '/../config.php';
 global $conn;
 
 //Debugging count
-$sql = "SELECT `name`, `department`, `college`, `email`, `mobile`, `event1`, `event2` FROM `participants` WHERE `event1` = 'Debugging' OR `event2` = 'Debugging'";
+$sql = "SELECT `name`, `department`, `college`, `email`, `mobile`, `event1` FROM `participants` WHERE `event1` = 'Debugging'";
 $result = $conn->query($sql);
 // Initialize counters
 $countEvent1_c_debugging = 0;
-$countEvent2_c_debugging = 0;
 
 // Loop through the results
 while ($row = mysqli_fetch_assoc($result)) {
@@ -16,91 +15,67 @@ while ($row = mysqli_fetch_assoc($result)) {
     if ($row['event1'] == 'Debugging') {
         $countEvent1_c_debugging++;
     }
-    // Check if the participant is in event2
-    if ($row['event2'] == 'Debugging') {
-        $countEvent2_c_debugging++;
-    }
 }
-$total_c_debugging = $countEvent1_c_debugging + $countEvent2_c_debugging;
+$total_c_debugging = $countEvent1_c_debugging;
 
 
 //Biz Masters count
-$sql = "SELECT `name`, `department`, `college`, `email`, `mobile`, `event1`, `event2` FROM `participants` WHERE `event1` IN ('Biz Masters', 'Marketing') OR `event2` IN ('Biz Masters', 'Marketing')";
+$sql = "SELECT `name`, `department`, `college`, `email`, `mobile`, `event1` FROM `participants` WHERE `event1` IN ('Biz Masters', 'Marketing')";
 $result = $conn->query($sql);
 $countEvent1_c_marketing = 0;
-$countEvent2_c_marketing = 0;
 while ($row = mysqli_fetch_assoc($result)) {
     if ($row['event1'] == 'Biz Masters' || $row['event1'] == 'Marketing') {
         $countEvent1_c_marketing++;
     }
-    if ($row['event2'] == 'Biz Masters' || $row['event2'] == 'Marketing') {
-        $countEvent2_c_marketing++;
-    }
 }
-$total_c_marketing = $countEvent1_c_marketing + $countEvent2_c_marketing;
+$total_c_marketing = $countEvent1_c_marketing;
 
 
 //paper presentation count
-$sql = "SELECT `name`, `department`, `college`, `email`, `mobile`, `event1`, `event2` FROM `participants` WHERE `event1` = 'Paper Presentation' OR `event2` = 'Paper Presentation'";
+$sql = "SELECT `name`, `department`, `college`, `email`, `mobile`, `event1` FROM `participants` WHERE `event1` = 'Paper Presentation'";
 $result = $conn->query($sql);
 $countEvent1_c_paper_presentation = 0;
-$countEvent2_c_paper_presentation = 0;
 while ($row = mysqli_fetch_assoc($result)) {
     if ($row['event1'] == 'Paper Presentation') {
         $countEvent1_c_paper_presentation++;
     }
-    if ($row['event2'] == 'Paper Presentation') {
-        $countEvent2_c_paper_presentation++;
-    }
 }
-$total_c_paper_presentation = $countEvent1_c_paper_presentation + $countEvent2_c_paper_presentation;
+$total_c_paper_presentation = $countEvent1_c_paper_presentation;
 
 
 //web designing count
-$sql = "SELECT `name`, `department`, `college`, `email`, `mobile`, `event1`, `event2` FROM `participants` WHERE `event1` = 'Web Designing' OR `event2` = 'Web Designing'";
+$sql = "SELECT `name`, `department`, `college`, `email`, `mobile`, `event1` FROM `participants` WHERE `event1` = 'Web Designing'";
 $result = $conn->query($sql);
 $countEvent1_c_web_designing = 0;
-$countEvent2_c_web_designing = 0;
 while ($row = mysqli_fetch_assoc($result)) {
     if ($row['event1'] == 'Web Designing') {
         $countEvent1_c_web_designing++;
     }
-    if ($row['event2'] == 'Web Designing') {
-        $countEvent2_c_web_designing++;
-    }
 }
-$total_c_web_designing = $countEvent1_c_web_designing + $countEvent2_c_web_designing;
+$total_c_web_designing = $countEvent1_c_web_designing;
 
 
 //poster designing count
-$sql = "SELECT `name`, `department`, `college`, `email`, `mobile`, `event1`, `event2` FROM `participants` WHERE `event1` = 'Poster Designing' OR `event2` = 'Poster Designing'";
+$sql = "SELECT `name`, `department`, `college`, `email`, `mobile`, `event1` FROM `participants` WHERE `event1` = 'Poster Designing'";
 $result = $conn->query($sql);
 $countEvent1_c_poster_designing = 0;
-$countEvent2_c_poster_designing = 0;
 while ($row = mysqli_fetch_assoc($result)) {
     if ($row['event1'] == 'Poster Designing') {
         $countEvent1_c_poster_designing++;
     }
-    if ($row['event2'] == 'Poster Designing') {
-        $countEvent2_c_poster_designing++;
-    }
 }
-$total_c_poster_designing = $countEvent1_c_poster_designing + $countEvent2_c_poster_designing;
+$total_c_poster_designing = $countEvent1_c_poster_designing;
 
 //ideathon count
-$sql = "SELECT `name`, `department`, `college`, `email`, `mobile`, `event1`, `event2` FROM `participants` WHERE `event1` = 'Ideathon' OR `event2` = 'Ideathon'";
+$sql = "SELECT `name`, `department`, `college`, `email`, `mobile`, `event1` FROM `participants` WHERE `event1` = 'Ideathon'";
 $result = $conn->query($sql);
 $countEvent1_c_ideathon = 0;
-$countEvent2_c_ideathon = 0;
 while ($row = mysqli_fetch_assoc($result)) {
     if ($row['event1'] == 'Ideathon') {
         $countEvent1_c_ideathon++;
     }
-    if ($row['event2'] == 'Ideathon') {
-        $countEvent2_c_ideathon++;
-    }
 }
-$total_c_ideathon = $countEvent1_c_ideathon + $countEvent2_c_ideathon;
+$total_c_ideathon = $countEvent1_c_ideathon;
 
 // INTER COLLEGE EVENTS COUNT END
 

@@ -1,8 +1,11 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+session_start();
 include_once __DIR__ . '/../config.php';
+
+// Prevent caching to ensure back button doesn't access protected pages after logout
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
 
 if (isset($_SESSION["user"])) {
     $user = $_SESSION["user"];
@@ -18,6 +21,14 @@ if (isset($_SESSION["user"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Spyder</title>
+    <script>
+        // Force reload if page is loaded from back-forward cache (BFCache)
+        window.addEventListener("pageshow", function(event) {
+            if (event.persisted) {
+                window.location.reload();
+            }
+        });
+    </script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -34,70 +45,18 @@ if (isset($_SESSION["user"])) {
             background-color: var(--bg-light);
             color: var(--text-color);
             margin: 0;
-         overflow-x: hidden; }
-
-        /* Sidebar Styling */
-        .sidebar {
-            background-color: var(--sidebar-bg);
-            min-height: 100vh;
-            width: 260px;
-             position: fixed !important;
-            left: 0;
-            top: 0;
-            z-index: 2000 !important;
-            transition: all 0.3s;
-            overflow: hidden;
+            overflow-x: hidden;
         }
 
-        
-
-        .sidebar img {
-            max-width: 150px;
-            height: auto;
-        }
-
-        
-
-        .sidebar img {
-            max-width: 150px;
-            height: auto;
-        }
-
-        .sidebar .nav-link {
-            color: rgba(255, 255, 255, 0.7);
-            padding: 14px 25px;
-            font-size: 1.05rem;
-            font-weight: 500;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            border-left: 4px solid transparent;
-        }
-
-        .sidebar .nav-link i {
-            margin-right: 15px;
-            width: 20px;
-            text-align: center;
-            font-size: 1.1rem;
-        }
-
-        .sidebar .nav-link:hover {
-            color: white;
-            background-color: rgba(255, 255, 255, 0.05);
-        }
-
-        .sidebar .nav-link.active {
-            color: white;
-            background-color: rgba(255, 255, 255, 0.08);
-            border-left-color: var(--primary-color);
-        }
 
         /* Main Content & Navbar */
         .main-content {
             margin-left: 260px;
             min-height: 100vh;
             transition: all 0.3s;
-         box-sizing: border-box !important; max-width: 100% !important; }
+            box-sizing: border-box !important;
+            max-width: 100% !important;
+        }
 
         .navbar {
             background-color: white;
@@ -154,7 +113,8 @@ if (isset($_SESSION["user"])) {
 
         .content-body {
             padding: 30px;
-         overflow-x: hidden; }
+            overflow-x: hidden;
+        }
 
         /* Responsive Improvements */
         @media (max-width: 992px) {
@@ -168,7 +128,9 @@ if (isset($_SESSION["user"])) {
 
             .main-content {
                 margin-left: 0;
-             box-sizing: border-box !important; max-width: 100% !important; }
+                box-sizing: border-box !important;
+                max-width: 100% !important;
+            }
 
             .navbar {
                 padding: 15px;
@@ -178,44 +140,7 @@ if (isset($_SESSION["user"])) {
 </head>
 
 <body>
-    <!-- Sidebar -->
-    <?php
-    $current_page = basename($_SERVER['PHP_SELF']);
-    $home_active = ($current_page == 'home.php') ? 'active' : '';
-    $clg_active = (strpos($current_page, 'inter_college') !== false || strpos($current_page, 'c_') === 0) ? 'active' : '';
-    $dept_active = (strpos($current_page, 'inter_department') !== false || strpos($current_page, 'i_') === 0) ? 'active' : '';
-    $create_active = ($current_page == 'create_achievement.php') ? 'active' : '';
-    $view_active = ($current_page == 'view_achievements.php' || $current_page == 'update_achievement.php') ? 'active' : '';
-    ?>
-
-    <div class="sidebar" id="sidebar">
-        <div class="nav-logo">
-            <a href="<?php echo BASE_URL; ?>dashboard/home.php">
-                <img src="<?php echo BASE_URL; ?>assets/img/logo/white-logo.png" alt="SPYDER">
-            </a>
-        </div>
-        <nav class="nav flex-column mt-2">
-            <a class="nav-link <?php echo $home_active; ?>" href="<?php echo BASE_URL; ?>dashboard/home.php">
-                <i class="fas fa-home"></i> Dashboard
-            </a>
-            <a class="nav-link <?php echo $clg_active; ?>"
-                href="<?php echo BASE_URL; ?>dashboard/inter_college/inter_college_home.php">
-                <i class="fas fa-users"></i> Inter College
-            </a>
-            <a class="nav-link <?php echo $dept_active; ?>"
-                href="<?php echo BASE_URL; ?>dashboard/inter_department/inter_department_home.php">
-                <i class="fas fa-building"></i> Inter Department
-            </a>
-            <a class="nav-link <?php echo $create_active; ?>"
-                href="<?php echo BASE_URL; ?>dashboard/create_achievement.php">
-                <i class="fas fa-plus-circle"></i> Create Achievement
-            </a>
-            <a class="nav-link <?php echo $view_active; ?>"
-                href="<?php echo BASE_URL; ?>dashboard/view_achievements.php">
-                <i class="fas fa-cog"></i> View Achievements
-            </a>
-        </nav>
-    </div>
+    <?php include_once __DIR__ . '/sidebar.php'; ?>
 
     <!-- Main Content -->
     <div class="main-content">
@@ -242,14 +167,3 @@ if (isset($_SESSION["user"])) {
 
         <div class="content-body">
             <!-- Content starts here -->
-
-
-
-
-
-
-
-
-
-
-

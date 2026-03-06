@@ -11,9 +11,9 @@ header('Content-Disposition: attachment; filename="' . $event_name . '_interdepa
 $output = fopen("php://output", "w");
 
 // Add the header of the CSV file
-fputcsv($output, array('Name', 'Department', 'College', 'Email', 'Mobile', 'Event1 Selection', 'Event2 Selection', 'Attendance', 'Signature'));
+fputcsv($output, array('Name', 'Department', 'College', 'Email', 'Mobile', 'Technical Event', 'Non-Technical Event', 'Tech Attendance', 'Non-Tech Attendance', 'Status'));
 
-$sql = "SELECT `name`, `department`, `college`, `email`, `mobile`, `event1`, `event2` FROM `interdepartment` WHERE `event1` = ? OR `event2` = ?";
+$sql = "SELECT `name`, `department`, `college`, `email`, `mobile`, `event1`, `event2`, `event1_attendance`, `event2_attendance` FROM `interdepartment` WHERE `event1` = ? OR `event2` = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("ss", $event_name, $event_name);
 $stmt->execute();
@@ -22,9 +22,7 @@ $result = $stmt->get_result();
 // Loop through the rows and write to the CSV file
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        // Add blank 'attendance' and 'Signature' fields for each row
-        $row['attendance'] = '';
-        $row['signature'] = '';
+        $row['status'] = ($row['event1_attendance'] || $row['event2_attendance']) ? 'Marked' : 'Pending';
         fputcsv($output, array_values($row));
     }
 } else {

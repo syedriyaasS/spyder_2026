@@ -29,33 +29,6 @@ if (isset($_SESSION["user"])) {
             overflow-x: hidden;
         }
 
-        .sidebar {
-            background-color: #1C1C1C;
-            min-height: 100vh;
-            width: 260px;
-            position: fixed !important;
-            left: 0;
-            top: 0;
-            padding-top: 0px;
-            transition: all 0.3s;
-            overflow: hidden;
-        }
-
-        .sidebar .nav-link {
-            color: white;
-            padding: 15px 25px;
-            font-size: 1.1rem;
-            transition: all 0.3s;
-        }
-
-        .sidebar .nav-link:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-
-        .sidebar .nav-link i {
-            margin-right: 10px;
-            width: 20px;
-        }
 
         .main-content {
             margin-left: 260px;
@@ -152,18 +125,6 @@ if (isset($_SESSION["user"])) {
             }
         }
 
-        .sidebar .nav-link.active {
-            background-color: rgba(255, 255, 255, 0.15);
-            border-left-color: white;
-            font-weight: 600;
-        }
-
-
-
-        .sidebar img {
-            max-width: 150px;
-            height: auto;
-        }
     </style>
 </head>
 
@@ -223,20 +184,7 @@ if (isset($_SESSION["user"])) {
     $view_active = in_array($current_page, ['view_achievements.php', 'update_achievement.php']) ? 'active' : '';
     ?>
 
-    <div class="sidebar">
-        <nav class="nav flex-column">
-            <a href="<?php echo BASE_URL; ?>dashboard/home.php"><img src="<?php echo BASE_URL; ?>assets/img/logo/white-logo.png" alt="SPYDER"></a>
-            <a class="nav-link <?php echo $home_active; ?>" href="<?php echo BASE_URL; ?>dashboard/home.php"><i class="fas fa-home"></i> Dashboard</a>
-            <a class="nav-link <?php echo $clg_active; ?>" href="<?php echo BASE_URL; ?>dashboard/inter_college/inter_college_home.php"><i
-                    class="fas fa-users"></i> Inter College</a>
-            <a class="nav-link <?php echo $dept_active; ?>" href="<?php echo BASE_URL; ?>dashboard/inter_department/inter_department_home.php"><i
-                    class="fas fa-box"></i> Inter Department</a>
-            <a class="nav-link <?php echo $create_active; ?>" href="<?php echo BASE_URL; ?>dashboard/create_achievement.php"><i
-                    class="fas fa-chart-bar"></i> Create Achievement</a>
-            <a class="nav-link <?php echo $view_active; ?>" href="<?php echo BASE_URL; ?>dashboard/view_achievements.php"><i class="fas fa-cog"></i>
-                View Achievements</a>
-        </nav>
-    </div>
+    <?php include_once __DIR__ . '/../sidebar.php'; ?>
 
     <!-- Main Content -->
     <div class="main-content">

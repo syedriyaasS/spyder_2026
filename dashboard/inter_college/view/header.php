@@ -223,20 +223,7 @@ if (isset($_SESSION["user"])) {
     $view_active = in_array($current_page, ['view_achievements.php', 'update_achievement.php']) ? 'active' : '';
     ?>
 
-    <div class="sidebar">
-        <nav class="nav flex-column">
-            <a href="<?php echo BASE_URL; ?>dashboard/home.php"><img src="<?php echo BASE_URL; ?>assets/img/logo/white-logo.png" alt="SPYDER"></a>
-            <a class="nav-link <?php echo $home_active; ?>" href="<?php echo BASE_URL; ?>dashboard/home.php"><i class="fas fa-home"></i> Dashboard</a>
-            <a class="nav-link <?php echo $clg_active; ?>" href="<?php echo BASE_URL; ?>dashboard/inter_college/inter_college_home.php"><i class="fas fa-users"></i>
-                Inter College</a>
-            <a class="nav-link <?php echo $dept_active; ?>" href="<?php echo BASE_URL; ?>dashboard/inter_department/inter_department_home.php"><i
-                    class="fas fa-box"></i> Inter Department</a>
-            <a class="nav-link <?php echo $create_active; ?>" href="<?php echo BASE_URL; ?>dashboard/create_achievement.php"><i
-                    class="fas fa-chart-bar"></i> Create Achievement</a>
-            <a class="nav-link <?php echo $view_active; ?>" href="<?php echo BASE_URL; ?>dashboard/view_achievements.php"><i class="fas fa-cog"></i>
-                View Achievements</a>
-        </nav>
-    </div>
+    <?php include_once __DIR__ . '/../../sidebar.php'; ?>
 
     <!-- Main Content -->
     <div class="main-content">

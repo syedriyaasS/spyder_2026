@@ -12,8 +12,8 @@ if (isset($_GET['id'])) {
         $college = $row['college'];
         $email = $row['email'];
         $mobile = $row['mobile'];
+        $batch = $row['batch'] ?? '';
         $event1 = $row['event1'];
-        $event2 = $row['event2'];
     }
     // Check if the update form is submitted
     if (isset($_POST['update_participantSql'])) {
@@ -22,10 +22,10 @@ if (isset($_GET['id'])) {
         $newcollege = $_POST['college'];
         $newemail = $_POST['email'];
         $newmobile = $_POST['mobile'];
+        $newbatch = $_POST['batch'] ?? '';
         $newevent1 = $_POST['event1'];
-        $newevent2 = $_POST['event2'];
         // Update the participant's information
-        $update_participantSql = "UPDATE participants SET `name` = '$newname',`department` = '$newdepartment',`college` = '$newcollege',`email` = '$newemail',`mobile` = '$newmobile',`event1` = '$newevent1', `event2` = '$newevent2' WHERE id = $participantId";
+        $update_participantSql = "UPDATE participants SET `name` = '$newname',`department` = '$newdepartment',`college` = '$newcollege',`email` = '$newemail',`mobile` = '$newmobile',`batch` = '$newbatch', `event1` = '$newevent1' WHERE id = $participantId";
         $result = $conn->query($update_participantSql);
         if ($result === TRUE) { // Check if the query was executed successfully
             echo "New Participant Record Updated successfully";
@@ -80,12 +80,12 @@ if (isset($_GET['id'])) {
                 <input type="type" name="mobile" value="<?php echo ($row['mobile']); ?>" class="form-control" required>
             </div>
             <div class="form-group">
-                <label for="event1">Event1:</label>
-                <input type="type" name="event1" value="<?php echo ($row['event1']); ?>" class="form-control">
+                <label for="batch">Year/Batch:</label>
+                <input type="type" name="batch" value="<?php echo ($row['batch'] ?? ''); ?>" class="form-control">
             </div>
             <div class="form-group">
-                <label for="event2">Event2:</label>
-                <input type="type" name="event2" value="<?php echo ($row['event2']); ?>" class="form-control">
+                <label for="event1">Event:</label>
+                <input type="type" name="event1" value="<?php echo ($row['event1']); ?>" class="form-control">
             </div>
             <button type="submit" name="update_participantSql" class="btn btn-primary" onclick="show_alert()"
                 value="Submit">Update</button>

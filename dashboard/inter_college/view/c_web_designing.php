@@ -1,6 +1,6 @@
 <?php
 include "header.php";
-$sql = "SELECT `name`, `department`, `college`, `email`, `mobile`, `event1`, `event2` FROM `participants` WHERE `event1` = 'Web Designing' OR `event2` = 'Web Designing'";
+$sql = "SELECT `name`, `department`, `college`, `email`, `mobile`, `event1` FROM `participants` WHERE `event1` = 'Web Designing' ";
 $result = $conn->query($sql);
 $conn->close();
 ?>
@@ -159,7 +159,7 @@ $conn->close();
                         <td>" . htmlspecialchars($row['college']) . "</td>
                         <td>" . htmlspecialchars($row['email']) . "</td>
                         <td>" . htmlspecialchars($row['mobile']) . "</td>
-                        <td>" . htmlspecialchars($row['event1'] ?: $row['event2']) . "</td>
+                        <td>" . htmlspecialchars($row['event1']) . "</td>
                     </tr>";
                 }
             } else {

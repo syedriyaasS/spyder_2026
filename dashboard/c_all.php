@@ -97,12 +97,16 @@ $conn->close();
         width: 10%;
     }
 
+    .data-table col.col-validated {
+        width: 15%;
+    }
+
     .data-table col.col-edit {
-        width: 7%;
+        width: 6%;
     }
 
     .data-table col.col-del {
-        width: 7%;
+        width: 6%;
     }
 
     .data-table thead tr {
@@ -206,8 +210,10 @@ $conn->close();
             <col class="col-college">
             <col class="col-email">
             <col class="col-mobile">
-            <col class="col-ev1">
-            <col class="col-ev2">
+            <col class="col-batch" style="width: 8%;">
+            <col class="col-event" style="width: 10%;">
+            <col class="col-att" style="width: 8%;">
+            <col class="col-validated">
             <col class="col-edit">
             <col class="col-del">
         </colgroup>
@@ -219,8 +225,10 @@ $conn->close();
                 <th>College</th>
                 <th>Email</th>
                 <th>Mobile</th>
-                <th>Event 1</th>
-                <th>Event 2</th>
+                <th>Batch</th>
+                <th>Event</th>
+                <th>Attendance</th>
+                <th>Validated By</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
@@ -231,6 +239,7 @@ $conn->close();
             if ($result && $result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     $count++;
+                    $att = ((int)($row['event_attendance'] ?? 0) === 1) ? '<span class="badge badge-success">Present</span>' : '<span class="badge badge-warning">Absent</span>';
                     echo "<tr>
                         <td><span style='color:#aaa;font-size:0.82rem;'>" . $count . "</span></td>
                         <td>" . htmlspecialchars($row['name']) . "</td>
@@ -238,8 +247,10 @@ $conn->close();
                         <td>" . htmlspecialchars($row['college']) . "</td>
                         <td>" . htmlspecialchars($row['email']) . "</td>
                         <td>" . htmlspecialchars($row['mobile']) . "</td>
+                        <td>" . htmlspecialchars($row['batch'] ?? '-') . "</td>
                         <td>" . htmlspecialchars($row['event1']) . "</td>
-                        <td>" . htmlspecialchars($row['event2']) . "</td>
+                        <td>" . $att . "</td>
+                        <td class='td-wrap'><small>" . htmlspecialchars($row['event1_validated_by'] ?? 'Not Verified') . "</small></td>
                         <td><a class='btn-edit' href='c_update.php?id=" . $row['id'] . "'>Edit</a></td>
                         <td><a class='btn-del' href='c_delete.php?id=" . $row['id'] . "' onclick=\"return confirm('Delete this participant?')\">Delete</a></td>
                     </tr>";

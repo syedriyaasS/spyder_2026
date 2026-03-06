@@ -1,6 +1,6 @@
 <?php
 include "header.php";
-$sql = "SELECT `name`, `department`, `college`, `email`, `mobile`, `event1`, `event2` FROM `interdepartment` WHERE `event1` = 'Group Dance' OR `event2` = 'Group Dance'";
+$sql = "SELECT `name`, `department`, `college`, `email`, `mobile`, `event1`, `event2`, `event1_attendance`, `event2_attendance` FROM `interdepartment` WHERE `event1` = 'Group Dance' OR `event2` = 'Group Dance'";
 $result = $conn->query($sql);
 $conn->close();
 ?>
@@ -129,7 +129,7 @@ $conn->close();
     </div>
 
     <div class="page-view-header">
-        <h2>Group-Dance &mdash; participants</h2>
+        <h2>Group Dance &mdash; participants</h2>
         <span id="count-badge" style="font-size:0.9rem;color:#888;"></span>
     </div>
 
@@ -139,10 +139,11 @@ $conn->close();
                 <th>#</th>
                 <th>Name</th>
                 <th>Department</th>
-                <th>College</th>
                 <th>Email</th>
                 <th>Mobile</th>
-                <th>Event</th>
+                <th>Technical Event</th>
+                <th>Non-Technical</th>
+                <th>Status</th>
             </tr>
         </thead>
         <tbody>
@@ -151,18 +152,20 @@ $conn->close();
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     $count++;
+                    $status = ($row['event1_attendance'] || $row['event2_attendance']) ? '<span class="badge bg-success">Marked</span>' : '<span class="badge bg-secondary">Pending</span>';
                     echo "<tr>
                         <td><span style='color:#aaa;font-size:0.82rem;'>" . $count . "</span></td>
                         <td>" . htmlspecialchars($row['name']) . "</td>
                         <td>" . htmlspecialchars($row['department']) . "</td>
-                        <td>" . htmlspecialchars($row['college']) . "</td>
                         <td>" . htmlspecialchars($row['email']) . "</td>
                         <td>" . htmlspecialchars($row['mobile']) . "</td>
-                        <td>" . htmlspecialchars($row['event1'] ?: $row['event2']) . "</td>
+                        <td>" . htmlspecialchars($row['event1'] ?: '-') . "</td>
+                        <td>" . htmlspecialchars($row['event2'] ?: '-') . "</td>
+                        <td>" . $status . "</td>
                     </tr>";
                 }
             } else {
-                echo "<tr><td colspan='7' class='empty-state'>No participants found for Group-Dance.</td></tr>";
+                echo "<tr><td colspan='8' class='empty-state'>No participants found for Group Dance.</td></tr>";
             }
             ?>
         </tbody>
