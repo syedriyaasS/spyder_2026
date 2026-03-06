@@ -190,6 +190,76 @@ if (!$dbCoord || $dbCoord['login_status'] !== 'active') {
             color: white;
         }
 
+        @keyframes pulse-green {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(25, 135, 84, 0.6);
+            }
+
+            70% {
+                transform: scale(1.02);
+                box-shadow: 0 0 0 15px rgba(25, 135, 84, 0);
+            }
+
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(25, 135, 84, 0);
+            }
+        }
+
+        .btn-pulse-confirm {
+            animation: pulse-green 1.5s infinite;
+            background: #198754 !important;
+            border: 2px solid #a3e6cd !important;
+            font-size: 1.15rem !important;
+            padding: 16px 20px !important;
+            color: white !important;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+        }
+
+        .btn-pulse-confirm:hover {
+            background: #157347 !important;
+            transform: translateY(-2px);
+        }
+
+        .action-required-banner {
+            background: #fff3cd;
+            color: #856404;
+            border: 2px solid #ffeeba;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.15);
+        }
+
+        .action-required-banner i {
+            color: #ffc107;
+            font-size: 1.3rem;
+            margin-right: 8px;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-back-small {
+            background: transparent;
+            color: #6c757d;
+            border: 1px solid #dee2e6;
+            padding: 6px 16px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-back-small:hover {
+            background: #f8f9fa;
+            color: #343a40;
+        }
+
         .scan-notification {
             display: none;
             padding: 16px 20px;
@@ -294,21 +364,28 @@ if (!$dbCoord || $dbCoord['login_status'] !== 'active') {
             <div id="reader"></div>
 
             <div id="result" class="participant-info" style="display:none;">
-                <h4 id="pName" class="participant-name"></h4>
-                <div class="row">
-                    <div class="col-6 col-md-3 mb-4">
+                <div id="actionBanner" class="action-required-banner" style="display:none;">
+                    <i class="fas fa-exclamation-triangle"></i> ACTION REQUIRED: Mark Attendance Below
+                </div>
+                <h4 class="participant-name mb-3 d-flex align-items-center">
+                    <span id="pName"></span>
+                    <i class="fas fa-info-circle ms-3 text-primary" style="font-size: 1.1rem; cursor: pointer; border: 1px solid #cce5ff; background: #e6f2ff; padding: 6px; border-radius: 50%; opacity: 0.9;" onclick="toggleDetails()" title="View Details"></i>
+                </h4>
+
+                <div class="row" id="pDetailsRow" style="display:none; transition: all 0.3s ease;">
+                    <div class="col-12 col-sm-6 mb-4">
                         <div class="info-label">College</div>
                         <div id="pCollege" class="info-value"></div>
                     </div>
-                    <div class="col-6 col-md-3 mb-4">
+                    <div class="col-12 col-sm-6 mb-4">
                         <div class="info-label">Department</div>
                         <div id="pDept" class="info-value"></div>
                     </div>
-                    <div class="col-6 col-md-3 mb-4">
+                    <div class="col-12 col-sm-6 mb-4">
                         <div class="info-label">Email</div>
-                        <div id="pEmail" class="info-value"></div>
+                        <div id="pEmail" class="info-value" style="word-break: break-all;"></div>
                     </div>
-                    <div class="col-6 col-md-3 mb-4">
+                    <div class="col-12 col-sm-6 mb-4">
                         <div class="info-label">Phone</div>
                         <div id="pPhone" class="info-value"></div>
                     </div>
@@ -317,9 +394,14 @@ if (!$dbCoord || $dbCoord['login_status'] !== 'active') {
                 <div id="pEvents" class="mt-2 mb-4 p-3 bg-light rounded" style="border: 1px solid #eee;"></div>
 
                 <hr id="confirmDivider" style="display:none; border-color: #eee; margin: 20px 0;">
-                <h5 id="confirmTitle" style="display:none; font-weight: 700; color: #1a1a1a;" class="mb-3">Confirm Attendance For:</h5>
-                <div id="eventButtons" class="row">
+                <div id="eventButtons" class="row justify-content-center">
                     <!-- Dynamic buttons will be injected here -->
+                </div>
+
+                <div class="text-center mt-4" id="cancelScanContainer" style="display:none;">
+                    <button class="btn-back-small" onclick="restartScanner()">
+                        <i class="fas fa-arrow-left"></i> Cancel & Back
+                    </button>
                 </div>
             </div>
         </div>
@@ -335,6 +417,24 @@ if (!$dbCoord || $dbCoord['login_status'] !== 'active') {
                 height: 250
             }
         };
+
+        function toggleDetails() {
+            const detailsRow = document.getElementById('pDetailsRow');
+            if (detailsRow.style.display === 'none') {
+                detailsRow.style.display = 'flex';
+            } else {
+                detailsRow.style.display = 'none';
+            }
+        }
+
+        function toggleDetails() {
+            const detailsRow = document.getElementById('pDetailsRow');
+            if (detailsRow.style.display === 'none') {
+                detailsRow.style.display = 'flex';
+            } else {
+                detailsRow.style.display = 'none';
+            }
+        }
 
         function onScanSuccess(decodedText, decodedResult) {
             currentToken = decodedText;
@@ -398,9 +498,9 @@ if (!$dbCoord || $dbCoord['login_status'] !== 'active') {
                                 if (!isPresent && isMyEvent) {
                                     hasActions = true;
                                     buttonsHtml += `
-                                    <div class="col-md-6 mb-3">
-                                        <button onclick="confirmAttendance('${event.event_key}', '${event.event_name}')" class="btn btn-confirm">
-                                            Confirm ${event.event_name}
+                                    <div class="col-12 col-md-8 mb-3">
+                                        <button onclick="confirmAttendance('${event.event_key}', '${event.event_name}')" class="btn btn-confirm btn-pulse-confirm">
+                                            <i class="fas fa-check-circle me-1"></i> Confirm Participation
                                         </button>
                                     </div>`;
                                 } else if (isPresent && isMyEvent) {
@@ -430,11 +530,22 @@ if (!$dbCoord || $dbCoord['login_status'] !== 'active') {
                         document.getElementById('pEvents').innerHTML = eventsHtml;
                         document.getElementById('eventButtons').innerHTML = buttonsHtml;
 
+                        document.getElementById('actionBanner').style.display = hasActions ? 'block' : 'none';
                         document.getElementById('confirmDivider').style.display = hasActions ? 'block' : 'none';
-                        document.getElementById('confirmTitle').style.display = hasActions ? 'block' : 'none';
 
+                        document.getElementById('scannerHeader').style.display = 'none';
                         document.getElementById('result').style.display = 'block';
-                        document.getElementById('resetScanner').style.display = 'block';
+
+                        // Logic for bottom buttons based on state
+                        if (hasActions) {
+                            // Needs confirmation: hide main scan button, show small cancel button
+                            document.getElementById('resetScanner').style.display = 'none';
+                            document.getElementById('cancelScanContainer').style.display = 'block';
+                        } else {
+                            // Already confirmed/marked logic: show big scan again button, hide cancel
+                            document.getElementById('resetScanner').style.display = 'inline-flex';
+                            document.getElementById('cancelScanContainer').style.display = 'none';
+                        }
                     } else {
                         Swal.fire({
                             title: 'Scan Error',
@@ -464,7 +575,7 @@ if (!$dbCoord || $dbCoord['login_status'] !== 'active') {
                 text: `Mark attendance for ${eventName}?`,
                 icon: 'question',
                 showCancelButton: true,
-                confirmButtonColor: '#851428',
+                confirmButtonColor: '#198754',
                 cancelButtonColor: '#6c757d',
                 confirmButtonText: 'Yes, Mark Present'
             }).then((result) => {
@@ -507,7 +618,10 @@ if (!$dbCoord || $dbCoord['login_status'] !== 'active') {
 
         function restartScanner() {
             document.getElementById('result').style.display = 'none';
+            document.getElementById('scannerHeader').style.display = 'block';
+            document.getElementById('pDetailsRow').style.display = 'none'; // reset details toggler
             document.getElementById('resetScanner').style.display = 'none';
+            document.getElementById('cancelScanContainer').style.display = 'none';
             html5QrCode.start({
                 facingMode: "environment"
             }, config, onScanSuccess);
