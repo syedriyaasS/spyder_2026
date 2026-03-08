@@ -50,9 +50,9 @@ try {
     $data_sql = "SELECT name, mobile_number, college, timestamp FROM (
         SELECT name, mobile as mobile_number, college, event1_validation_time as timestamp FROM participants WHERE event1_validated_by = ? AND event_attendance = 1 AND (name LIKE ? OR mobile LIKE ? OR college LIKE ?)
         UNION ALL
-        SELECT name, mobile as mobile_number, college, event1_timestamp as timestamp FROM interdepartment WHERE event1_validated_by = ? AND event1_attendance = 1 AND (name LIKE ? OR mobile LIKE ? OR college LIKE ?)
+        SELECT name, mobile as mobile_number, college, event1_validation_time as timestamp FROM interdepartment WHERE event1_validated_by = ? AND event1_attendance = 1 AND (name LIKE ? OR mobile LIKE ? OR college LIKE ?)
         UNION ALL
-        SELECT name, mobile as mobile_number, college, event2_timestamp as timestamp FROM interdepartment WHERE event2_validated_by = ? AND event2_attendance = 1 AND (name LIKE ? OR mobile LIKE ? OR college LIKE ?)
+        SELECT name, mobile as mobile_number, college, event2_validation_time as timestamp FROM interdepartment WHERE event2_validated_by = ? AND event2_attendance = 1 AND (name LIKE ? OR mobile LIKE ? OR college LIKE ?)
     ) combined 
     ORDER BY timestamp DESC 
     LIMIT ? OFFSET ?";

@@ -81,11 +81,11 @@ try {
         if ($event_key === 'event1') {
             $actual_event_name = $participant['event1'] ?? '';
             $already_attended  = (int)($participant['event1_attendance'] ?? 0);
-            $update_sql = "UPDATE interdepartment SET event1_attendance = 1, event1_validated_by = ?, event1_timestamp = CURRENT_TIMESTAMP, event_attendance = '1', event_timestamp = CURRENT_TIMESTAMP WHERE qr_token = ?";
+            $update_sql = "UPDATE interdepartment SET event1_attendance = 1, event1_validated_by = ?, event1_validation_time = CURRENT_TIMESTAMP WHERE qr_token = ?";
         } else {
             $actual_event_name = $participant['event2'] ?? '';
             $already_attended  = (int)($participant['event2_attendance'] ?? 0);
-            $update_sql = "UPDATE interdepartment SET event2_attendance = 1, event2_validated_by = ?, event2_timestamp = CURRENT_TIMESTAMP, event_attendance = '1', event_timestamp = CURRENT_TIMESTAMP WHERE qr_token = ?";
+            $update_sql = "UPDATE interdepartment SET event2_attendance = 1, event2_validated_by = ?, event2_validation_time = CURRENT_TIMESTAMP WHERE qr_token = ?";
         }
     }
 
