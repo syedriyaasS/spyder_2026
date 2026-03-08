@@ -16,12 +16,16 @@
     <link rel="stylesheet" href="../assets/css/magnific-popup.css">
     <link rel="stylesheet" href="../assets/css/fontawesome-all.min.css">
     <link rel="stylesheet" href="../assets/css/themify-icons.css">
-    <link rel="stylesheet" href="../assets/css/themify-icons.css">
+    <link rel="stylesheet" href="../assets/css/flaticon.css">
+    <link rel="stylesheet" href="../assets/css/gijgo.css">
     <link rel="stylesheet" href="../assets/css/slick.css">
     <link rel="stylesheet" href="../assets/css/nice-select.css">
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/custom.css">
-    <link rel="stylesheet" href="../assets/css/register.css">
+    
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
     <style>
         main {
             text-align: center;
@@ -85,7 +89,7 @@
     <!-- Preloader Start -->
     <header>
         <!--? Header Start -->
-        <div class="header-area bg-light">
+        <div class="header-area">
             <div class="main-header header-sticky">
                 <div class="container-fluid">
                     <div class="row align-items-center">
@@ -98,8 +102,8 @@
                         <div class="col-xl-10 col-lg-10 col-md-10">
                             <div class="menu-main d-flex align-items-center justify-content-end">
                                 <!-- Main-menu -->
-                                <div class="main-menu f-right d-none d-lg-block">
-                                    <nav class="bg-light">
+                                <div class="main-menu f-right d-none d-lg-block navbar-spacing">
+                                    <nav>
                                         <ul id="navigation">
                                             <li><a href="../index.html">Home</a></li>
                                             <li><a href="../events.html">Events</a></li>
@@ -139,7 +143,7 @@
         <!-- Certificate Form (Visible when enabled) -->
         <div id="cert-status-enabled" style="display: none;">
             <div class="back">
-                <img src="../assets/img/logo/white-logo-font.png" alt="" width="250px" class="mb-4">
+                <img src="../assets/img/logo/logo-text-black.png" alt="" width="250px" class="mb-4">
             </div>
             <h2 style="font-weight: 700; color: #1a1a1a;">Get Your Certificate</h2>
             <p class="email" style="color: #666; margin-bottom: 20px;">Please enter your registered Email address to
@@ -339,6 +343,43 @@
     <!-- Jquery Plugins, main Jquery -->
     <script src="../assets/js/plugins.js"></script>
     <script src="../assets/js/main.js"></script>
+
+    <!-- Error Handling via URL Parameters -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const errorType = urlParams.get('error');
+
+            if (errorType) {
+                let title = 'Oops!';
+                let text = 'Something went wrong.';
+
+                if (errorType === 'not_attended') {
+                    title = 'Attendance Not Verified';
+                    text = 'You have not attended the event or your attendance is not yet verified. Please contact the coordinator.';
+                } else if (errorType === 'not_found') {
+                    title = 'Participant Not Found';
+                    text = 'No participant found with that email address. Please make sure you entered the correct email.';
+                }
+
+                Swal.fire({
+                    title: title,
+                    text: text,
+                    icon: 'warning',
+                    confirmButtonColor: '#851428',
+                    confirmButtonText: 'Okay',
+                    background: '#fff',
+                    customClass: {
+                        popup: 'animated fadeInDown faster'
+                    }
+                }).then(() => {
+                    // Remove the error parameter from the URL after displaying the alert
+                    const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+                    window.history.replaceState({path: newUrl}, '', newUrl);
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

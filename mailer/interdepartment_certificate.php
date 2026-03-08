@@ -51,27 +51,30 @@ function handle_download($certificates, $email)
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    log_debug("Received POST request");
-    $email = $_POST["email"];
+    $email = $conn->real_escape_string($_POST["email"]);
     $sql = "SELECT * FROM `interdepartment` WHERE `email` = '$email'";
-    log_debug("Executing SQL query: $sql");
+    
+    // Disable error reporting output to avoid corrupting file binaries
+    ini_set('display_errors', 0);
+    error_reporting(0);
 
     $result = $conn->query($sql);
     if ($result && $result->num_rows > 0) {
-        log_debug("Participant found for email: $email");
         $row = $result->fetch_assoc();
         $name = $row["name"];
         $event1 = $row["event1"];
         $event2 = $row["event2"];
+        $event1_attended = (int)$row["event1_attendance"];
+        $event2_attended = (int)$row["event2_attendance"];
         $certificates = [];
 
-        // Generate certificate for event1
-        if (!empty($event1)) {
+        // Generate certificate for event1 ONLY if attended
+        if (!empty($event1) && $event1_attended === 1) {
             $pdf1 = new FPDF('L');
             $pdf1->AddPage();
             $pdf1->SetDisplayMode('fullpage');
             $pdf1->SetFont('Arial', 'B', 16);
-            $pdf1->Image('./spyder_2025_certificate.jpg', 0, 0, 300, 210);
+            $pdf1->Image('./spyder_2026_certificate.jpg', 0, 0, 300, 210);
             $pdf1->SetTextColor(0, 0, 0);
             $pdf1->SetXY(140, 134);
             $pdf1->Cell(90, 1, $name, 0, 1, 'C');
@@ -83,17 +86,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 mkdir(dirname($file_path1), 0777, true);
             }
             $pdf1->Output($file_path1, 'F');
-            log_debug("Generated certificate for event1: $file_path1");
             $certificates[] = $file_path1;
         }
 
-        // Generate certificate for event2
-        if (!empty($event2)) {
+        // Generate certificate for event2 ONLY if attended
+        if (!empty($event2) && $event2_attended === 1) {
             $pdf2 = new FPDF('L');
             $pdf2->AddPage();
             $pdf2->SetDisplayMode('fullpage');
             $pdf2->SetFont('Arial', 'B', 16);
-            $pdf2->Image('./spyder_2025_certificate.jpg', 0, 0, 300, 210);
+            $pdf2->Image('./spyder_2026_certificate.jpg', 0, 0, 300, 210);
             $pdf2->SetTextColor(0, 0, 0);
             $pdf2->SetXY(140, 134);
             $pdf2->Cell(90, 1, $name, 0, 1, 'C');
@@ -105,20 +107,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 mkdir(dirname($file_path2), 0777, true);
             }
             $pdf2->Output($file_path2, 'F');
-            log_debug("Generated certificate for event2: $file_path2");
             $certificates[] = $file_path2;
         }
 
-        handle_download($certificates, $email);
+        if (count($certificates) > 0) {
+            if (ob_get_length()) ob_clean(); // Prevent output corruption
+            handle_download($certificates, $email);
+        } else {
+            header("Location: interdepartment_certificate.html?error=not_attended");
+            exit();
+        }
     } else {
-        log_debug("No participant found for email: $email");
-        echo "<script>
-                alert('No participant found with the email: $email');
-                window.location.href = 'interdepartment_certificate.html';
-            </script>";
+        header("Location: interdepartment_certificate.html?error=not_found");
+        exit();
     }
 } else {
-    log_debug("Invalid request method");
     header("Location: interdepartment_certificate.html");
     exit();
 }

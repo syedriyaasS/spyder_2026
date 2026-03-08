@@ -9,6 +9,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/fontawesome-all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
     <style>
         :root {
             --primary: #851428;
@@ -304,6 +308,44 @@
         © 2026 SPYDER Department of Information Technology
     </footer>
 
+    <!-- Error Handling via URL Parameters -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const errorType = urlParams.get('error');
+
+            if (errorType) {
+                let title = 'Oops!';
+                let text = 'Something went wrong.';
+
+                if (errorType === 'not_attended') {
+                    title = 'Attendance Not Verified';
+                    text = 'You have not attended any events or your attendance is not yet verified. Please contact your coordinator.';
+                } else if (errorType === 'not_found') {
+                    title = 'Participant Not Found';
+                    text = 'No participant found with that email address. Please make sure you entered the correct email.';
+                }
+
+                Swal.fire({
+                    title: title,
+                    text: text,
+                    icon: 'warning',
+                    confirmButtonColor: '#851428',
+                    confirmButtonText: 'Okay',
+                    background: '#0a0b10', // Dark background to match the interdepartment theme
+                    color: '#ffffff',
+                    customClass: {
+                        popup: 'animated fadeInDown faster',
+                        confirmButton: 'btn btn-primary' // Matches their button styling
+                    }
+                }).then(() => {
+                    // Remove the error parameter from the URL after displaying the alert
+                    const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+                    window.history.replaceState({path: newUrl}, '', newUrl);
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>
