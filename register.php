@@ -118,9 +118,19 @@
             </div>
         </div>
         <!-- Header End -->
-    </header>
     <main>
 
+        <?php
+        include_once __DIR__ . '/config.php';
+        $status_sql = "SELECT setting_value FROM site_settings WHERE setting_key = 'registration_status'";
+        $status_result = $conn->query($status_sql);
+        $registration_status = 'open'; // default
+        if ($status_result && $status_result->num_rows > 0) {
+            $registration_status = $status_result->fetch_assoc()['setting_value'];
+        }
+        
+        if ($registration_status === 'open') {
+        ?>
         <!-- ============================================================
              OLD REGISTRATION FORM — COMMENTED OUT FOR BACKUP
              (Backend logic in PHP below is still active and unchanged)
@@ -226,11 +236,12 @@
             </div>
         </section>
         <!-- END OF OLD FORM BACKUP -->
+        <?php } else { ?>
 
         <!-- ============================================================
              NEW UI — REGISTRATION CLOSED CARD
         ============================================================= -->
-        <!--
+        
         <section class="reg-closed-section">
             <div class="container">
                 <div class="row justify-content-center align-items-center" style="min-height: 70vh;">
@@ -250,7 +261,8 @@
                 </div>
             </div>
         </section>
-        -->
+        
+        <?php } ?>
 
         <style>
             /* Registration Closed Section */
@@ -527,6 +539,25 @@
     <script src="./assets/js/jquery.form.js"></script>
     <script src="./assets/js/jquery.validate.min.js"></script>
     <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
+
+    <!-- Dynamic Registration Switcher -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('api/get_site_settings.php')
+                .then(response => response.json())
+                .then(settings => {
+                    if (settings.switch_registration === 'local') {
+                        // Update nav button if 'local' is selected
+                        const navButton = document.querySelector('.nav-button');
+                        if (navButton) {
+                            navButton.href = 'register.php';
+                            navButton.target = '_self';
+                        }
+                    }
+                })
+                .catch(error => console.error('Error fetching site settings:', error));
+        });
+    </script>
 
     <!-- Jquery Plugins, main Jquery -->
     <script src="./assets/js/plugins.js"></script>

@@ -789,6 +789,27 @@
 <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
 
 <!-- Jquery Plugins, main Jquery -->
+
+<!-- Dynamic Registration Switcher -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const googleUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdunW7ZGSgQoE6VaNo4ynI6cXz9kchHnbNK_FsHrBBCxHQaoA/viewform?usp=dialog";
+
+        fetch('api/get_site_settings.php')
+            .then(response => response.json())
+            .then(settings => {
+                if (settings.switch_registration === 'local') {
+                    const registerLinks = document.querySelectorAll('a[href="' + googleUrl + '"]');
+                    registerLinks.forEach(link => {
+                        link.href = 'register.php';
+                        link.target = '_self';
+                    });
+                }
+            })
+            .catch(error => console.error('Error fetching site settings:', error));
+    });
+</script>
+
 <script src="./assets/js/plugins.js"></script>
 <script src="./assets/js/main.js"></script>
 

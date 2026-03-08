@@ -128,24 +128,56 @@
         <!-- Header End -->
     </header>
     <main class="container">
-        <h3 class="mb-5">You can get your certificates after participation</h3>
-        <div>
-            <img src="../assets/img/elements/later.png" alt="" width="200px">
+        <!-- Default Message (Visible when disabled) -->
+        <div id="cert-status-disabled" style="display: none;">
+            <h3 class="mb-5">You can get your certificates after participation</h3>
+            <div>
+                <img src="../assets/img/elements/later.png" alt="" width="200px">
+            </div>
         </div>
-        <!-- CERTIFICATE START -->
-        <!-- <div class="back">
-            <img src="/assets/img/logo/logo with text.png" alt="" width="200px">
+
+        <!-- Certificate Form (Visible when enabled) -->
+        <div id="cert-status-enabled" style="display: none;">
+            <div class="back">
+                <img src="../assets/img/logo/white-logo-font.png" alt="" width="250px" class="mb-4">
+            </div>
+            <h2 style="font-weight: 700; color: #1a1a1a;">Get Your Certificate</h2>
+            <p class="email" style="color: #666; margin-bottom: 20px;">Please enter your registered Email address to
+                retrieve your certificate.</p>
+            <form action="certificate.php" method="post" style="max-width: 400px; width: 100%;">
+                <label for="email" class="sr-only">Registered Email:</label>
+                <input type="email" id="email" name="email" class="form-control mb-3" placeholder="Registered Email"
+                    style="padding: 12px; border-radius: 8px;" required>
+                <button type="submit" class="btn btn-lg w-100"
+                    style="background-color: #851428; color: white; padding: 12px; border-radius: 8px; font-weight: 600;">Get
+                    Certificate</button>
+            </form>
         </div>
-        <h2>Get Your Certificate</h2>
-        <p class="email">Please enter your registered Email</p>
-        <form action="certificate.php" method="post">
-            <label for="email" class="sr-only">Registered Email:</label>
-            <input type="email" id="email" name="email" placeholder="Registered Email" required>
-            <br>
-            <button type="submit">Get Certificate</button>
-        </form> -->
-        <!-- CERTIFICATE END -->
     </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('../api/get_site_settings.php')
+                .then(response => response.json())
+                .then(settings => {
+                    const disabledDiv = document.getElementById('cert-status-disabled');
+                    const enabledDiv = document.getElementById('cert-status-enabled');
+
+                    if (settings.certificate_status === 'enabled') {
+                        enabledDiv.style.display = 'block';
+                        disabledDiv.style.display = 'none';
+                    } else {
+                        enabledDiv.style.display = 'none';
+                        disabledDiv.style.display = 'block';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching settings:', error);
+                    document.getElementById('cert-status-disabled').style.display = 'block';
+                });
+        });
+    </script>
+
     <footer>
         <!-- Footer Start-->
         <div class="footer-area footer-padding">
@@ -233,7 +265,7 @@
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
                         <!-- logo -->
                         <div class="footer-logo mb-20 site-name">
-                            <a href="index.html"><img src="assets/img/logo/logo2_footer.png" alt=""></a>
+                            <a href="index.html"><img src="../assets/img/logo/logo2_footer.png" alt=""></a>
                         </div>
                     </div>
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
@@ -251,7 +283,8 @@
                                 </a>
                                 <a href="https://www.linkedin.com/in/karthick-n-20603b256/" target="_blank"
                                     class="linkedin-1">
-                                    <img src="assets/img/logo/linkedin.logo.png" width="20px" height="auto" alt=""></a>
+                                    <img src="../assets/img/logo/linkedin.logo.png" width="20px" height="auto"
+                                        alt=""></a>
                                 <br>
                             </div>
                             <div class="developers">
@@ -259,7 +292,8 @@
                                     <p>Mr. S. Syed Riyaas</p>
                                 </a>
                                 <a href="https://www.linkedin.com/in/syed-riyaas-91190b268/" target="_blank">
-                                    <img src="assets/img/logo/linkedin.logo.png" width="20px" height="auto" alt=""></a>
+                                    <img src="../assets/img/logo/linkedin.logo.png" width="20px" height="auto"
+                                        alt=""></a>
                             </div>
                         </div>
                     </div>

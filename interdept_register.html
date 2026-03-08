@@ -683,6 +683,37 @@
         </footer>
     </div>
 
+    <!-- Registration Closed Overlay -->
+    <div id="regClosedOverlay"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 11, 16, 0.98); z-index: 10000; flex-direction: column; align-items: center; justify-content: center; padding: 20px; text-align: center;">
+        <div
+            style="background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 24px; padding: 50px 40px; max-width: 500px; width: 100%; backdrop-filter: blur(12px); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);">
+            <div
+                style="width: 80px; height: 80px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 30px;">
+                <i class="fas fa-lock" style="font-size: 35px; color: white;"></i>
+            </div>
+            <h2 style="font-size: 32px; font-weight: 600; color: #fff; margin-bottom: 15px;">Registration Closed</h2>
+            <p style="font-size: 16px; color: var(--text-muted); line-height: 1.6; margin-bottom: 30px;">We're sorry,
+                registration for the Inter Department Event is currently closed. Please contact the organizers for more
+                information.</p>
+            <a href="index.html" class="popup-btn" style="text-decoration: none; display: inline-block;">Go Back
+                Home</a>
+        </div>
+    </div>
+
+    <script>
+        // Check Registration Status
+        fetch('api/get_site_settings.php')
+            .then(response => response.json())
+            .then(settings => {
+                if (settings.dept_registration_status === 'closed') {
+                    document.getElementById('regClosedOverlay').style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                }
+            })
+            .catch(error => console.error('Error fetching registration status:', error));
+    </script>
+
     <!-- Custom Popup -->
     <div id="customPopup" class="popup-overlay">
         <div class="popup-content">

@@ -252,10 +252,9 @@
     </div>
 
     <div class="main-container">
-        <!-- <form action="interdepartment_certificate.php" method="post"> -->
         <h3>INTER DEPARTMENT EVENT CERTIFICATES</h3>
 
-        <div style="text-align: center; margin: 40px 0;">
+        <div id="cert-status-disabled" style="display: none; text-align: center; margin: 40px 0;">
             <i class="fas fa-star"
                 style="font-size: 54px; color: #b38b4d; margin-bottom: 20px; filter: drop-shadow(0 0 10px rgba(179, 139, 77, 0.3));"></i>
             <h4 style="color: #fff; font-size: 1.2rem; line-height: 1.6; max-width: 80%; margin: 0 auto;">
@@ -264,18 +263,42 @@
             </h4>
         </div>
 
-        <!--
-            <h4>Enter your registered email</h4>
-            <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="email" name="email" placeholder="Email ID" required>
-            </div>
+        <div id="cert-status-enabled" style="display: none;">
+            <form action="interdepartment_certificate.php" method="post">
+                <h4>Enter your registered email</h4>
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Email ID" required>
+                </div>
 
-            <div class="submit">
-                <button type="submit" name="submit" value="submit">Get Certificate</button>
-            </div>
+                <div class="submit">
+                    <button type="submit" name="submit" value="submit">Get Certificate</button>
+                </div>
             </form>
-            -->
+        </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('../api/get_site_settings.php')
+                .then(response => response.json())
+                .then(settings => {
+                    const disabledDiv = document.getElementById('cert-status-disabled');
+                    const enabledDiv = document.getElementById('cert-status-enabled');
+
+                    if (settings.dept_certificate_status === 'enabled') {
+                        enabledDiv.style.display = 'block';
+                        disabledDiv.style.display = 'none';
+                    } else {
+                        enabledDiv.style.display = 'none';
+                        disabledDiv.style.display = 'block';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching settings:', error);
+                    document.getElementById('cert-status-disabled').style.display = 'block';
+                });
+        });
+    </script>
 
     <footer>
         © 2026 SPYDER Department of Information Technology

@@ -7,6 +7,7 @@ $dept_pages = ['inter_department_home.php', 'i_all.php', 'i_update.php'];
 $create_ach_pages = ['create_achievement.php'];
 $view_ach_pages = ['view_achievements.php', 'update_achievement.php'];
 $coord_pages = ['manage_coordinators.php'];
+$config_pages = ['index.php', 'inter_college_config.php', 'inter_department_config.php'];
 
 // Helper to determine active state
 $home_active = ($current_page == 'home.php') ? 'active' : '';
@@ -15,6 +16,7 @@ $clg_active = (in_array($current_page, $clg_pages) || strpos($current_page, 'c_'
 $dept_active = (in_array($current_page, $dept_pages) || strpos($current_page, 'i_') === 0 || strpos($_SERVER['PHP_SELF'], 'inter_department') !== false) ? 'active' : '';
 $create_active = (in_array($current_page, $create_ach_pages)) ? 'active' : '';
 $view_active = (in_array($current_page, $view_ach_pages)) ? 'active' : '';
+$config_active = (in_array($current_page, $config_pages) && strpos($_SERVER['PHP_SELF'], 'configure_site') !== false) ? 'active' : '';
 ?>
 
 <style>
@@ -134,6 +136,9 @@ $view_active = (in_array($current_page, $view_ach_pages)) ? 'active' : '';
         </a>
         <a class="nav-link <?php echo $view_active; ?>" href="<?php echo BASE_URL; ?>dashboard/view_achievements.php">
             <i class="fas fa-cog"></i> <span>View Achievements</span>
+        </a>
+        <a class="nav-link <?php echo $config_active; ?>" href="<?php echo BASE_URL; ?>dashboard/configure_site/index.php">
+            <i class="fas fa-sliders-h"></i> <span>Configure Website</span>
         </a>
     </nav>
 </div>

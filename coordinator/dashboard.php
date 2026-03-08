@@ -320,9 +320,38 @@ if (!$dbCoord || $dbCoord['login_status'] !== 'active') {
             transition: all 0.2s;
         }
 
-        .logout-btn:hover {
-            background: #fef2f2;
-            color: #b02a37;
+        /* View Participants Button Styles */
+        .view-participants-wrapper {
+            padding: 20px;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+        }
+
+        .btn-view-participants {
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(133, 20, 40, 0.2);
+        }
+
+        .btn-view-participants:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(133, 20, 40, 0.3);
+            color: #fff;
         }
     </style>
 </head>
@@ -362,50 +391,61 @@ if (!$dbCoord || $dbCoord['login_status'] !== 'active') {
                 <i class="fas fa-camera text-muted me-2"></i> Point camera at the QR code
             </div>
             <div id="reader"></div>
-
-            <div id="result" class="participant-info" style="display:none;">
-                <div id="actionBanner" class="action-required-banner" style="display:none;">
-                    <i class="fas fa-exclamation-triangle"></i> ACTION REQUIRED: Mark Attendance Below
-                </div>
-                <h4 class="participant-name mb-3 d-flex align-items-center">
-                    <span id="pName"></span>
-                    <i class="fas fa-info-circle ms-3 text-primary" style="font-size: 1.1rem; cursor: pointer; border: 1px solid #cce5ff; background: #e6f2ff; padding: 6px; border-radius: 50%; opacity: 0.9;" onclick="toggleDetails()" title="View Details"></i>
-                </h4>
-
-                <div class="row" id="pDetailsRow" style="display:none; transition: all 0.3s ease;">
-                    <div class="col-12 col-sm-6 mb-4">
-                        <div class="info-label">College</div>
-                        <div id="pCollege" class="info-value"></div>
+            
+            <div id="result" class="participant-info">
+                <div class="text-center mb-4">
+                    <div id="pName" class="participant-name mb-1 border-0 pb-0" style="font-size: 1.8rem;"></div>
+                    <button class="btn btn-sm btn-link text-muted mt-2 p-0" onclick="toggleDetails()" style="text-decoration: none; font-weight: 500;">
+                        <i class="fas fa-info-circle me-1"></i> View More Details
+                    </button>
+                    <!-- Small toggleable details section -->
+                    <div id="pDetailsRow" class="row mt-4 px-3" style="display: none; background: #f8fafc; border-radius: 8px; padding-top: 15px; padding-bottom: 5px; border: 1px solid #e2e8f0;">
+                        <div class="col-6 mb-3 text-start">
+                            <div class="info-label">College</div>
+                            <div class="info-value" id="pCollege" style="font-size: 0.95rem;"></div>
+                        </div>
+                        <div class="col-6 mb-3 text-end">
+                            <div class="info-label">Department</div>
+                            <div class="info-value" id="pDept" style="font-size: 0.95rem;"></div>
+                        </div>
+                        <div class="col-6 mb-3 text-start">
+                            <div class="info-label">Email</div>
+                            <div class="info-value" id="pEmail" style="word-break: break-all; font-size: 0.85rem;"></div>
+                        </div>
+                        <div class="col-6 mb-3 text-end">
+                            <div class="info-label">Phone</div>
+                            <div class="info-value" id="pPhone" style="font-size: 0.95rem;"></div>
+                        </div>
                     </div>
-                    <div class="col-12 col-sm-6 mb-4">
-                        <div class="info-label">Department</div>
-                        <div id="pDept" class="info-value"></div>
-                    </div>
-                    <div class="col-12 col-sm-6 mb-4">
-                        <div class="info-label">Email</div>
-                        <div id="pEmail" class="info-value" style="word-break: break-all;"></div>
-                    </div>
-                    <div class="col-12 col-sm-6 mb-4">
-                        <div class="info-label">Phone</div>
-                        <div id="pPhone" class="info-value"></div>
-                    </div>
-                </div>
-
-                <div id="pEvents" class="mt-2 mb-4 p-3 bg-light rounded" style="border: 1px solid #eee;"></div>
-
-                <hr id="confirmDivider" style="display:none; border-color: #eee; margin: 20px 0;">
-                <div id="eventButtons" class="row justify-content-center">
-                    <!-- Dynamic buttons will be injected here -->
                 </div>
 
-                <div class="text-center mt-4" id="cancelScanContainer" style="display:none;">
-                    <button class="btn-back-small" onclick="restartScanner()">
-                        <i class="fas fa-arrow-left"></i> Cancel & Back
+                <div id="actionBanner" class="action-required-banner" style="display: none;">
+                    <i class="fas fa-exclamation-triangle"></i> Confirmation Required
+                </div>
+
+                <div class="mb-4 text-center">
+                    <div class="info-label mb-2">Registered Events</div>
+                    <div id="pEvents" class="info-value" style="font-size: 1.1rem;"></div>
+                </div>
+
+                <hr id="confirmDivider" style="display: none; border-top: 2px dashed #eee; margin: 25px 0;">
+
+                <div class="row justify-content-center" id="eventButtons">
+                </div>
+
+                <div id="cancelScanContainer" class="text-center mt-4" style="display: none;">
+                    <button onclick="restartScanner()" class="btn-back-small">
+                        <i class="fas fa-arrow-left"></i> Back to Scanner
                     </button>
                 </div>
             </div>
+
+            <div class="view-participants-wrapper">
+                <a href="view_participants.php" class="btn-view-participants">
+                    <i class="fas fa-users"></i> View Participants
+                </a>
+            </div>
         </div>
-    </div>
 
     <script>
         let currentToken = null;
@@ -628,7 +668,8 @@ if (!$dbCoord || $dbCoord['login_status'] !== 'active') {
         }
 
         document.getElementById('resetScanner').addEventListener('click', restartScanner);
+
+        document.getElementById('resetScanner').addEventListener('click', restartScanner);
     </script>
 </body>
-
 </html>
