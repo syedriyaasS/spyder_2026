@@ -164,6 +164,117 @@ if (isset($_SESSION["user"])) {
             max-width: 150px;
             height: auto;
         }
+
+        /* Attendance Modal Styles */
+        .attendance-modal {
+            display: none;
+            position: fixed;
+            z-index: 3000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .attendance-modal.show {
+            display: flex;
+        }
+
+        .attendance-modal-content {
+            background-color: #fff;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            position: relative;
+            padding: 30px;
+            text-align: center;
+            animation: modalFadeIn 0.3s ease-out;
+        }
+
+        @keyframes modalFadeIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .attendance-modal-header {
+            margin-bottom: 20px;
+        }
+
+        .attendance-modal-header h4 {
+            font-weight: 700;
+            color: #1a1a1a;
+            margin: 0;
+        }
+
+        .attendance-modal-close {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 24px;
+            color: #aaa;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .attendance-modal-close:hover {
+            color: #333;
+        }
+
+        .attendance-modal-body {
+            margin-bottom: 30px;
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .attendance-modal-footer {
+            display: flex;
+            justify-content: center;
+        }
+
+        .btn-confirm-attendance {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .btn-confirm-attendance:hover {
+            background-color: #6a0f20;
+        }
+
+        .btn-validate {
+            padding: 6px 14px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 4px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-validate:hover {
+            background-color: #6a0f20;
+            box-shadow: 0 2px 6px rgba(133, 20, 40, 0.3);
+        }
+
+        .btn-validate:disabled {
+            background-color: #e9ecef;
+            color: #6c757d;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
     </style>
 </head>
 

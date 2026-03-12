@@ -1,6 +1,6 @@
 <?php
 include "header.php";
-$sql = "SELECT `name`, `department`, `college`, `email`, `mobile`, `event1`, `event2`, `event1_attendance`, `event2_attendance` FROM `interdepartment` WHERE `event1` = 'Individual Talent' OR `event2` = 'Individual Talent'";
+$sql = "SELECT `id`, `name`, `department`, `college`, `email`, `mobile`, `event1`, `event2`, `event1_attendance`, `event2_attendance` FROM `interdepartment` WHERE `event1` = 'Individual Talent' OR `event2` = 'Individual Talent'";
 $result = $conn->query($sql);
 $conn->close();
 ?>
@@ -144,7 +144,7 @@ $conn->close();
                 <th>Mobile</th>
                 <th>Technical Event</th>
                 <th>Non-Technical</th>
-                <th>Status</th>
+                <th>Attendance</th>
             </tr>
         </thead>
         <tbody>
@@ -153,7 +153,9 @@ $conn->close();
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     $count++;
-                    $status = ($row['event1_attendance'] || $row['event2_attendance']) ? '<span class="badge bg-success">Marked</span>' : '<span class="badge bg-secondary">Pending</span>';
+                    $isMarked = $row['event2_attendance'] == 1;
+                    $btnText = $isMarked ? 'Validated' : 'Validate';
+                    $btnDisabled = $isMarked ? 'disabled' : '';
                     echo "<tr>
                         <td><span style='color:#aaa;font-size:0.82rem;'>" . $count . "</span></td>
                         <td>" . htmlspecialchars($row['name']) . "</td>
@@ -162,7 +164,9 @@ $conn->close();
                         <td>" . htmlspecialchars($row['mobile']) . "</td>
                         <td>" . htmlspecialchars($row['event1'] ?: '-') . "</td>
                         <td>" . htmlspecialchars($row['event2'] ?: '-') . "</td>
-                        <td>" . $status . "</td>
+                        <td>
+                            <button class='btn-validate' $btnDisabled onclick='openAttendanceModal(" . $row['id'] . ", \"event2\", this)'>$btnText</button>
+                        </td>
                     </tr>";
                 }
             } else {
