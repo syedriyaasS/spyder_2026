@@ -16,8 +16,8 @@ function log_debug($message)
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = $conn->real_escape_string($_POST["email"]);
-    $sql = "SELECT * FROM `interdepartment` WHERE `email` = '$email'";
+    $identifier = $conn->real_escape_string($_POST["identifier"]);
+    $sql = "SELECT * FROM `interdepartment` WHERE `email` = '$identifier' OR `mobile` = '$identifier'";
     
     // Disable error reporting output to avoid corrupting file binaries during PDF generation
     ini_set('display_errors', 0);
@@ -70,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     // Create ZIP
                     $zip = new ZipArchive();
-                    $zipFileName = "Certificates_{$email}.zip";
+                    $zipFileName = "Certificates_{$identifier}.zip";
                     $zipFilePath = sys_get_temp_dir() . '/' . $zipFileName;
 
                     if ($zip->open($zipFilePath, ZipArchive::CREATE | ZipArchive::OVERWRITE) === TRUE) {
@@ -120,7 +120,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Final buffer clean before headers
                 if (ob_get_level() > 0) ob_end_clean();
 
-                $fileName = "Certificates_{$email}.pdf";
+                $fileName = "Certificates_{$identifier}.pdf";
                 header('Content-Type: application/pdf');
                 header('Content-Disposition: attachment; filename="' . $fileName . '"');
                 $pdf->Output('D', $fileName);
@@ -143,7 +143,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Final buffer clean before headers
                 if (ob_get_level() > 0) ob_end_clean();
 
-                $fileName = "Certificate_{$email}.pdf";
+                $fileName = "Certificate_{$identifier}.pdf";
                 header('Content-Type: application/pdf');
                 header('Content-Disposition: attachment; filename="' . $fileName . '"');
                 $pdf->Output('D', $fileName);
