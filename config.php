@@ -41,6 +41,9 @@ if (!defined('BASE_URL')) {
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+// Disable mysqli exceptions (restore old behavior) to prevent early 500 errors
+mysqli_report(MYSQLI_REPORT_OFF);
+
 $servername = $_ENV['DB_HOST'] ?? "localhost";
 $username = $_ENV['DB_USER'] ?? "root";
 $password = $_ENV['DB_PASS'] ?? "";

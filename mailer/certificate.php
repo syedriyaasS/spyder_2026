@@ -19,6 +19,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $attended = (int)$row["event_attendance"];
 
         if ($attended === 1 && !empty($event1)) {
+            // Clean output buffer to ensure no corruption
+            if (ob_get_level() > 0) ob_clean();
+            
             // Create and download a PDF
             $pdf1 = new FPDF('L');
             $pdf1->AddPage();
@@ -33,24 +36,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $pdf1->Cell(60, 1, $event1, 0, 1, 'C');
 
             // Force download for event
-            $fileName1 = "{$email}_{$event1}.pdf";
+            $fileName1 = "Certificate_{$email}.pdf";
             
-            // Clean any potential output buffers before sending binary PDF
-            if (ob_get_length()) ob_clean();
+            // Final clean before headers
+            if (ob_get_level() > 0) ob_end_clean();
             
             header('Content-Type: application/pdf');
             header('Content-Disposition: attachment; filename="' . $fileName1 . '"');
             $pdf1->Output('D', $fileName1);
             exit();
         } else {
+            if (ob_get_level() > 0) ob_end_clean();
             header("Location: certificate.html?error=not_attended");
             exit();
         }
     } else {
+        if (ob_get_level() > 0) ob_end_clean();
         header("Location: certificate.html?error=not_found");
         exit();
     }
 } else {
+    if (ob_get_level() > 0) ob_end_clean();
     header("Location: certificate.html");
     exit();
 }
