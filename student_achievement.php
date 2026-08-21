@@ -267,8 +267,6 @@
 										<li>2. Ms. Krithika Devi . K - III B.Sc IT</li>
 										<li>3. Mr. Pravinth . N - II B.Sc IT</li>
 										<li>4. Ms. Kalaiselvi . S - II B.Sc IT</li>
-										<li>5. Mr. - I B.Sc IT</li>
-										<li>6. Ms. - I B.Sc IT</li>
 										<h5>PG</h5>
 										<li>1. Mr. Cheralathan. R.V - II M.Sc IT</li>
 										<li>2. Ms. Vaishnavi. M - II M.Sc IT</li>
