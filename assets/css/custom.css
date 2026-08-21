@@ -327,32 +327,144 @@ a:hover {
 .webdevelopers-content {
     color: #64676C !important;
     text-align: justify;
+    line-height: 1.7;
 }
 
 .webdevelopers-content a {
     color: #851428;
+    font-weight: 600;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.webdevelopers-content a:hover {
+    color: #c11539;
 }
 
 .webdev-image {
     display: flex;
-    flex-direction: row;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    margin-bottom: 25px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .webdev-image img {
-    width: 600px;
+    width: 100%;
+    max-width: 600px;
     height: auto;
-    border-radius: 20px;
+    object-fit: cover;
+    border-radius: 16px;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.webdev-image img:hover {
+    transform: scale(1.02);
+}
+
+/* Developer Mini Cards Layout */
+.webdev-card-row {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+    justify-content: space-between;
+}
+
+.webdev-mini-card {
+    flex: 1;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 24px 18px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(133, 20, 40, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.webdev-mini-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 32px rgba(133, 20, 40, 0.15);
+    border-color: rgba(133, 20, 40, 0.3);
+}
+
+.webdev-mini-photo {
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #851428;
+    margin-bottom: 14px;
+    box-shadow: 0 4px 12px rgba(133, 20, 40, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.webdev-mini-card:hover .webdev-mini-photo {
+    transform: scale(1.06);
+}
+
+.webdev-mini-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.webdev-mini-name {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #1f242e;
+    margin-bottom: 4px;
+    line-height: 1.3;
+}
+
+.webdev-mini-role {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: #851428;
+    margin-bottom: 10px;
+}
+
+.webdev-divider {
+    width: 36px;
+    height: 3px;
+    background: linear-gradient(90deg, #851428, #c11539);
+    border-radius: 2px;
+    margin-bottom: 12px;
+    display: block;
+}
+
+.webdev-mini-description {
+    font-size: 0.875rem;
+    line-height: 1.55;
+    color: #555555;
+    margin-bottom: 0;
+    text-align: center;
 }
 
 @media (max-width: 770px) {
     .webdev-image img {
-        width: fit-content;
-        height: 275px;
-        border-radius: 20px;
+        width: 100%;
+        height: auto;
+        border-radius: 16px;
+    }
+
+    .webdev-card-row {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .webdev-mini-card {
+        width: 100%;
     }
 }
+
 
 /* Card Hover animation */
 .card-hover {

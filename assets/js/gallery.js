@@ -27,12 +27,21 @@ function closeFullScreen() {
 }
 
 // Map old function names to the unified one for compatibility with HTML
+function openFullScreen7() { openFullScreen('7'); }
 function openFullScreen6() { openFullScreen('6'); }
 function openFullScreen5() { openFullScreen('5'); }
 function openFullScreen1() { openFullScreen('1'); }
 function openFullScreen2() { openFullScreen('2'); }
 function openFullScreen3() { openFullScreen('3'); }
 function openFullScreen4() { openFullScreen('4'); }
+
+function closeFullScreen7() { closeFullScreen(); }
+function closeFullScreen6() { closeFullScreen(); }
+function closeFullScreen5() { closeFullScreen(); }
+function closeFullScreen1() { closeFullScreen(); }
+function closeFullScreen2() { closeFullScreen(); }
+function closeFullScreen3() { closeFullScreen(); }
+function closeFullScreen4() { closeFullScreen(); }
 
 function replaceMainImage(yearId, thumbnail) {
   const mainImage = document.getElementById("mainImage" + yearId);
@@ -74,6 +83,7 @@ function replaceMainImage(yearId, thumbnail) {
 }
 
 // Specialized functions for each year (physical element swap)
+function replaceMainImage7(thumbnail) { replaceMainImage('7', thumbnail); }
 function replaceMainImage6(thumbnail) { replaceMainImage('6', thumbnail); }
 function replaceMainImage5(thumbnail) { replaceMainImage('5', thumbnail); }
 function replaceMainImage1(thumbnail) { replaceMainImage('1', thumbnail); }
