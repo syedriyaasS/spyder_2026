@@ -112,7 +112,7 @@
 									</nav>
 								</div>
 								<div class="header-right-btn f-right d-none d-lg-block ml-30">
-									<a href="https://docs.google.com/forms/d/e/1FAIpQLSdunW7ZGSgQoE6VaNo4ynI6cXz9kchHnbNK_FsHrBBCxHQaoA/viewform?usp=dialog"
+									<a href="https://docs.google.com/forms/d/e/1FAIpQLScMqs0BNuhULpaNSnFpFeIYTJEU9XyUYZ78U9d-amQ-34b0gQ/viewform"
 										target="_blank" class="btn header-btn nav-button">Register now</a>
 								</div>
 							</div>
