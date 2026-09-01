@@ -94,9 +94,9 @@ a:active {
     padding-left: 70px;
 }
 
-.team-img {
+/* .team-img {
     /* margin-left: -10px; */
-}
+/* } */
 
 .section-padding22 {
     padding-top: 0px;
@@ -248,7 +248,9 @@ body {
 .hcard-1:hover,
 .hcard-2:hover,
 .hcard-3:hover,
-.hcard-4:hover {}
+.hcard-4:hover {
+    transform: translateY(-10px);  /* upward movement*/
+}
 
 /* Card Responsive */
 @media (max-width:575px) {
