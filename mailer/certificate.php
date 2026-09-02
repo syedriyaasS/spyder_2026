@@ -29,11 +29,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $pdf1->SetFont('Arial', 'B', 16);
             $pdf1->Image('./spyder_2026_certificate.jpg', 0, 0, 300, 210);
             $pdf1->SetTextColor(0, 0, 0);
-            $pdf1->SetXY(140, 134);
-            $pdf1->Cell(90, 1, $name, 0, 1, 'C');
-            $pdf1->SetXY(100, 144);
-            $pdf1->SetFont('Arial', 'B', 16);
-            $pdf1->Cell(60, 1, $event1, 0, 1, 'C');
+            $pdf1->SetXY(118, 126.5);
+            $pdf1->Cell(133, 6, $name, 0, 1, 'C');
+            $pdf1->SetXY(93, 136.8);
+            $pdf1->SetFont('Arial', 'B', 15);
+            $pdf1->Cell(83, 6, $event1, 0, 1, 'C');
 
             // Force download for event
             $fileName1 = "Certificate_{$email}.pdf";
