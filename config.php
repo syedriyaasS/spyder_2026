@@ -32,8 +32,19 @@ if (file_exists($envFile)) {
     }
 }
 
-$base_url = $_ENV['BASE_URL'] ?? '/';
 if (!defined('BASE_URL')) {
+    $envBase = $_ENV['BASE_URL'] ?? '';
+    if (!empty($envBase) && $envBase !== '/') {
+        $base_url = rtrim($envBase, '/') . '/';
+    } else {
+        $docRoot = str_replace('\\', '/', $_SERVER['DOCUMENT_ROOT'] ?? '');
+        $dir = str_replace('\\', '/', __DIR__);
+        $relativePath = str_replace($docRoot, '', $dir);
+        $base_url = '/' . trim($relativePath, '/') . '/';
+        if ($base_url === '//') {
+            $base_url = '/';
+        }
+    }
     define('BASE_URL', $base_url);
 }
 
@@ -44,15 +55,13 @@ ini_set('display_errors', 1);
 // Disable mysqli exceptions (restore old behavior) to prevent early 500 errors
 mysqli_report(MYSQLI_REPORT_OFF);
 
-$servername = $_ENV['DB_HOST'] ?? "localhost";
-$username = $_ENV['DB_USER'] ?? "root";
+$host = !empty($_ENV['DB_HOST']) ? $_ENV['DB_HOST'] : "localhost";
+$user = !empty($_ENV['DB_USER']) ? $_ENV['DB_USER'] : "root";
 $password = $_ENV['DB_PASS'] ?? "";
-$dbname = $_ENV['DB_NAME'] ?? "spyder";
+$database = !empty($_ENV['DB_NAME']) ? $_ENV['DB_NAME'] : "new_spyder";
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($host, $user, $password, $database);
 
 if ($conn->connect_error) {
-    die("connection failed:" . $conn->connect_error);
-} else {
-    // echo "connected";
+    die("Connection failed: " . $conn->connect_error);
 }

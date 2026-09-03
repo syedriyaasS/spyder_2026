@@ -349,8 +349,8 @@
 
                                             Coimbatore - 641028</p>
                                     </li>
-                                    <li><a href="#">Kavinraj R :<span> 8838345346</span></a></li>
-                                    <li><a href="#">Siva Prasad U :<span> 9345613592</span></a></li>
+                                    <li><a href="#">Cheralathan. R.V :<span> 636961857</span></a></li>
+                                    <li><a href="#">Pravinth N :<span> 7305305700</span></a></li>
                                     <li><a href="#">Email :<span>itspyder@hicas.ac.in</span></a></li>
                                 </ul>
                             </div>
@@ -378,16 +378,17 @@
                                 <h5 class="footer-UG">UG</h5>
                                 <div class="footer-pera footer-pera2">
                                     <ul>
-                                        <li>1. Mr. Siva Prasad U - III B.Sc IT </li>
-                                        <li>2. Mr. Pradeepkumar. K - III B.Sc IT</li>
-                                        <li>3. Mr. Dhilipkumar. G - III B.Sc IT</li>
-                                        <li>4. Ms. Preethika S - II B.Sc IT</li>
-                                        <li>5. Mr. Pravinth N - I B.Sc IT</li>
+                                        <li>1. Ms. Kalaiarasi . M - III B.Sc IT</li>
+                                        <li>2. Ms. Krithika Devi . K - III B.Sc IT</li>
+                                        <li>3. Mr. Pravinth . N - II B.Sc IT</li>
+                                        <li>4. Ms. Kalaiselvi . S - II B.Sc IT</li>
+                                        <li>5. Mr. - I B.Sc IT</li>
+                                        <li>6. Ms. - I B.Sc IT</li>
                                         <h5>PG</h5>
-                                        <li>1. Ms.Sathya. P - II M.Sc IT </li>
-                                        <li>2. Mr.Kavinraj. R - II M.Sc IT</li>
-                                        <li>3. Mr.Cheralathan. R.V - I M.Sc IT</li>
-                                        <li>4. Ms.Vaishnavi. M - I M.Sc IT</li>
+                                        <li>1. Mr. Cheralathan. R.V - II M.Sc IT</li>
+                                        <li>2. Ms. Vaishnavi. M - II M.Sc IT</li>
+                                        <li>3. Mr. Navaneetha Krishnan. J - I M.Sc IT</li>
+                                        <li>4. Ms. Agilandeswari. VM- I M.Sc IT</li>
                                     </ul>
                                 </div>
 
@@ -426,6 +427,22 @@
                                     <p>Mr. S. Syed Riyaas</p>
                                 </a>
                                 <a href="https://www.linkedin.com/in/syed-riyaas-91190b268/" target="_blank">
+                                    <img src="assets/img/logo/linkedin.logo.png" width="20px" height="auto" alt=""></a>
+                            </div>
+                            <br>
+                            <div class="developers">
+                                <a href="https://www.linkedin.com/in/pravinth-n-a29592401/" target="_blank">
+                                    <p>Pravinth N</p>
+                                </a>
+                                <a href="https://www.linkedin.com/in/pravinth-n-a29592401/" target="_blank">
+                                    <img src="assets/img/logo/linkedin.logo.png" width="20px" height="auto" alt=""></a>
+                            </div>
+                            <br>
+                            <div class="developers">
+                                <a href="" target="_blank">
+                                    <p>Kalaiselvis S</p>
+                                </a>
+                                <a href="" target="_blank">
                                     <img src="assets/img/logo/linkedin.logo.png" width="20px" height="auto" alt=""></a>
                             </div>
                         </div>
