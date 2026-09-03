@@ -15,6 +15,48 @@ function log_debug($message)
     error_log("[DEBUG] " . $message);
 }
 
+function renderInterDeptCertificateText($pdf, $name, $event, $canvasW = 300, $canvasH = 210)
+{
+    // Relative positioning calculated from template dimensions (1536x1024)
+    $origW = 1536;
+    $origH = 1024;
+    $scaleX = $canvasW / $origW;
+    $scaleY = $canvasH / $origH;
+
+    // 1. Participant Name: centered on blank line after "This is to certify that"
+    $nameX = 527 * $scaleX;
+    $nameW = (1191 - 527) * $scaleX;
+    $nameLineY = 649 * $scaleY;
+
+    $nameFontSize = 16;
+    $pdf->SetTextColor(0, 0, 0);
+    $pdf->SetFont('Arial', 'B', $nameFontSize);
+    while ($pdf->GetStringWidth($name) > ($nameW - 6) && $nameFontSize > 10) {
+        $nameFontSize -= 0.5;
+        $pdf->SetFont('Arial', 'B', $nameFontSize);
+    }
+    $nameBaselineOffset = 0.5 + (0.3 * ($nameFontSize * 25.4 / 72));
+    $nameY = ($nameLineY - 0.8) - $nameBaselineOffset;
+    $pdf->SetXY($nameX, $nameY);
+    $pdf->Cell($nameW, 1, $name, 0, 1, 'C');
+
+    // 2. Event Name: centered on blank line between "for participating in" and "event organized by"
+    $eventX = 545 * $scaleX;
+    $eventW = (1014 - 545) * $scaleX;
+    $eventLineY = 698 * $scaleY;
+
+    $eventFontSize = 16;
+    $pdf->SetFont('Arial', 'B', $eventFontSize);
+    while ($pdf->GetStringWidth($event) > ($eventW - 6) && $eventFontSize > 10) {
+        $eventFontSize -= 0.5;
+        $pdf->SetFont('Arial', 'B', $eventFontSize);
+    }
+    $eventBaselineOffset = 0.5 + (0.3 * ($eventFontSize * 25.4 / 72));
+    $eventY = ($eventLineY - 0.8) - $eventBaselineOffset;
+    $pdf->SetXY($eventX, $eventY);
+    $pdf->Cell($eventW, 1, $event, 0, 1, 'C');
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $identifier = $conn->real_escape_string($_POST["identifier"]);
     $sql = "SELECT * FROM `interdepartment` WHERE `email` = '$identifier' OR `mobile` = '$identifier'";
@@ -46,26 +88,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $pdf1 = new FPDF('L');
                     $pdf1->AddPage();
                     $pdf1->SetDisplayMode('fullpage');
-                    $pdf1->SetFont('Arial', 'B', 16);
-                    $pdf1->Image('./spyder_2026_certificate.jpg', 0, 0, 300, 210);
-                    $pdf1->SetTextColor(0, 0, 0);
-                    $pdf1->SetXY(140, 134);
-                    $pdf1->Cell(90, 1, $name, 0, 1, 'C');
-                    $pdf1->SetXY(100, 144);
-                    $pdf1->Cell(60, 1, $event1, 0, 1, 'C');
+                    $pdf1->Image('./spyder_2026_interdept_certificate.jpeg', 0, 0, 300, 210);    
+                    renderInterDeptCertificateText($pdf1, $name, $event1);
                     $pdf1Content = $pdf1->Output('S');
 
                     // Generate event2 PDF
                     $pdf2 = new FPDF('L');
                     $pdf2->AddPage();
                     $pdf2->SetDisplayMode('fullpage');
-                    $pdf2->SetFont('Arial', 'B', 16);
-                    $pdf2->Image('./spyder_2026_certificate.jpg', 0, 0, 300, 210);
-                    $pdf2->SetTextColor(0, 0, 0);
-                    $pdf2->SetXY(140, 134);
-                    $pdf2->Cell(90, 1, $name, 0, 1, 'C');
-                    $pdf2->SetXY(100, 144);
-                    $pdf2->Cell(60, 1, $event2, 0, 1, 'C');
+                    $pdf2->Image('./spyder_2026_interdept_certificate.jpeg', 0, 0, 300, 210);
+                    renderInterDeptCertificateText($pdf2, $name, $event2);
                     $pdf2Content = $pdf2->Output('S');
 
                     // Create ZIP
@@ -98,24 +130,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Page for event1
                 $pdf->AddPage();
                 $pdf->SetDisplayMode('fullpage');
-                $pdf->SetFont('Arial', 'B', 16);
-                $pdf->Image('./spyder_2026_certificate.jpg', 0, 0, 300, 210);
-                $pdf->SetTextColor(0, 0, 0);
-                $pdf->SetXY(140, 134);
-                $pdf->Cell(90, 1, $name, 0, 1, 'C');
-                $pdf->SetXY(100, 144);
-                $pdf->Cell(60, 1, $event1, 0, 1, 'C');
+                $pdf->Image('./spyder_2026_interdept_certificate.jpeg', 0, 0, 300, 210);
+                renderInterDeptCertificateText($pdf, $name, $event1);
 
                 // Page for event2
                 $pdf->AddPage();
                 $pdf->SetDisplayMode('fullpage');
-                $pdf->SetFont('Arial', 'B', 16);
-                $pdf->Image('./spyder_2026_certificate.jpg', 0, 0, 300, 210);
-                $pdf->SetTextColor(0, 0, 0);
-                $pdf->SetXY(140, 134);
-                $pdf->Cell(90, 1, $name, 0, 1, 'C');
-                $pdf->SetXY(100, 144);
-                $pdf->Cell(60, 1, $event2, 0, 1, 'C');
+                $pdf->Image('./spyder_2026_interdept_certificate.jpeg', 0, 0, 300, 210);
+                renderInterDeptCertificateText($pdf, $name, $event2);
 
                 // Final buffer clean before headers
                 if (ob_get_level() > 0) ob_end_clean();
@@ -130,15 +152,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $pdf = new FPDF('L');
                 $pdf->AddPage();
                 $pdf->SetDisplayMode('fullpage');
-                $pdf->SetFont('Arial', 'B', 16);
-                $pdf->Image('./spyder_2026_certificate.jpg', 0, 0, 300, 210);
-                $pdf->SetTextColor(0, 0, 0);
-                $pdf->SetXY(140, 134);
-                $pdf->Cell(90, 1, $name, 0, 1, 'C');
-                $pdf->SetXY(100, 144);
+                $pdf->Image('./spyder_2026_interdept_certificate.jpeg', 0, 0, 300, 210);
                 
                 $actual_event = $has_event1 ? $event1 : $event2;
-                $pdf->Cell(60, 1, $actual_event, 0, 1, 'C');
+                renderInterDeptCertificateText($pdf, $name, $actual_event);
 
                 // Final buffer clean before headers
                 if (ob_get_level() > 0) ob_end_clean();
@@ -166,4 +183,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 $conn->close();
+
 
