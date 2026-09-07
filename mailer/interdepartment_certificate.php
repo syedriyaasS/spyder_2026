@@ -24,9 +24,9 @@ function renderInterDeptCertificateText($pdf, $name, $event, $canvasW = 300, $ca
     $scaleY = $canvasH / $origH;
 
     // 1. Participant Name: centered on blank line after "This is to certify that"
-    $nameX = 527 * $scaleX;
-    $nameW = (1191 - 527) * $scaleX;
-    $nameLineY = 649 * $scaleY;
+    $nameX = 565 * $scaleX;
+    $nameW = (1194 - 565) * $scaleX;
+    $nameLineY = 620 * $scaleY;
 
     $nameFontSize = 16;
     $pdf->SetTextColor(0, 0, 0);
@@ -36,14 +36,14 @@ function renderInterDeptCertificateText($pdf, $name, $event, $canvasW = 300, $ca
         $pdf->SetFont('Arial', 'B', $nameFontSize);
     }
     $nameBaselineOffset = 0.5 + (0.3 * ($nameFontSize * 25.4 / 72));
-    $nameY = ($nameLineY - 0.8) - $nameBaselineOffset;
+    $nameY = ($nameLineY - 1.8) - $nameBaselineOffset;
     $pdf->SetXY($nameX, $nameY);
     $pdf->Cell($nameW, 1, $name, 0, 1, 'C');
 
     // 2. Event Name: centered on blank line between "for participating in" and "event organized by"
-    $eventX = 545 * $scaleX;
-    $eventW = (1014 - 545) * $scaleX;
-    $eventLineY = 698 * $scaleY;
+    $eventX = 543 * $scaleX;
+    $eventW = (1013 - 543) * $scaleX;
+    $eventLineY = 671 * $scaleY;
 
     $eventFontSize = 16;
     $pdf->SetFont('Arial', 'B', $eventFontSize);
@@ -52,7 +52,7 @@ function renderInterDeptCertificateText($pdf, $name, $event, $canvasW = 300, $ca
         $pdf->SetFont('Arial', 'B', $eventFontSize);
     }
     $eventBaselineOffset = 0.5 + (0.3 * ($eventFontSize * 25.4 / 72));
-    $eventY = ($eventLineY - 0.8) - $eventBaselineOffset;
+    $eventY = ($eventLineY - 1.8) - $eventBaselineOffset;
     $pdf->SetXY($eventX, $eventY);
     $pdf->Cell($eventW, 1, $event, 0, 1, 'C');
 }
@@ -88,7 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $pdf1 = new FPDF('L');
                     $pdf1->AddPage();
                     $pdf1->SetDisplayMode('fullpage');
-                    $pdf1->Image('./spyder_2026_interdept_certificate.jpeg', 0, 0, 300, 210);    
+                    $pdf1->Image('./spyder_inter_department_certificate.jpeg', 0, 0, 300, 210);    
                     renderInterDeptCertificateText($pdf1, $name, $event1);
                     $pdf1Content = $pdf1->Output('S');
 
@@ -96,7 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $pdf2 = new FPDF('L');
                     $pdf2->AddPage();
                     $pdf2->SetDisplayMode('fullpage');
-                    $pdf2->Image('./spyder_2026_interdept_certificate.jpeg', 0, 0, 300, 210);
+                    $pdf2->Image('./spyder_inter_department_certificate.jpeg', 0, 0, 300, 210);
                     renderInterDeptCertificateText($pdf2, $name, $event2);
                     $pdf2Content = $pdf2->Output('S');
 
@@ -130,13 +130,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Page for event1
                 $pdf->AddPage();
                 $pdf->SetDisplayMode('fullpage');
-                $pdf->Image('./spyder_2026_interdept_certificate.jpeg', 0, 0, 300, 210);
+                $pdf->Image('./spyder_inter_department_certificate.jpeg', 0, 0, 300, 210);
                 renderInterDeptCertificateText($pdf, $name, $event1);
 
                 // Page for event2
                 $pdf->AddPage();
                 $pdf->SetDisplayMode('fullpage');
-                $pdf->Image('./spyder_2026_interdept_certificate.jpeg', 0, 0, 300, 210);
+                $pdf->Image('./spyder_inter_department_certificate.jpeg', 0, 0, 300, 210);
                 renderInterDeptCertificateText($pdf, $name, $event2);
 
                 // Final buffer clean before headers
@@ -152,7 +152,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $pdf = new FPDF('L');
                 $pdf->AddPage();
                 $pdf->SetDisplayMode('fullpage');
-                $pdf->Image('./spyder_2026_interdept_certificate.jpeg', 0, 0, 300, 210);
+                $pdf->Image('./spyder_inter_department_certificate.jpeg', 0, 0, 300, 210);
                 
                 $actual_event = $has_event1 ? $event1 : $event2;
                 renderInterDeptCertificateText($pdf, $name, $actual_event);
