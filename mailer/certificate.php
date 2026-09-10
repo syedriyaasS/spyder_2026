@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $pdf1->AddPage();
             $pdf1->SetDisplayMode('fullpage');
             $pdf1->SetFont('Arial', 'B', 16);
-            $pdf1->Image('./spyder_2026_certificate.jpg', 0, 0, 300, 210);
+            $pdf1->Image('./spyder_2026_intercollege_certificter.jpeg', 0, 0, 300, 210);
             $pdf1->SetTextColor(0, 0, 0);
 
             // Relative positioning calculated from Inter College certificate template dimensions (1024x682)
