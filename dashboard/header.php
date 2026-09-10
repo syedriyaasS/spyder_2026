@@ -48,6 +48,38 @@ if (isset($_SESSION["user"])) {
             overflow-x: hidden;
         }
 
+        /* Badge Custom Styles (Fix Bootstrap 5 badge visibility with black text) */
+        .badge {
+            display: inline-block !important;
+            padding: 5px 12px !important;
+            font-size: 0.8rem !important;
+            font-weight: 700 !important;
+            line-height: 1.2 !important;
+            border-radius: 20px !important;
+            text-align: center !important;
+            white-space: nowrap !important;
+            vertical-align: middle !important;
+            color: #000000 !important;
+        }
+
+        .badge-success {
+            background-color: #d1e7dd !important;
+            color: #000000 !important;
+            border: 1px solid #a3cfbb !important;
+        }
+
+        .badge-warning {
+            background-color: #fff3cd !important;
+            color: #000000 !important;
+            border: 1px solid #ffe69c !important;
+        }
+
+        .badge-danger {
+            background-color: #f8d7da !important;
+            color: #000000 !important;
+            border: 1px solid #f1aeb5 !important;
+        }
+
 
         /* Main Content & Navbar */
         .main-content {
